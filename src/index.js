@@ -1,19 +1,34 @@
 document.addEventListener("DOMContentLoaded",function(){
 
-
-    fetchNotes();
+    fetchDays();
 })
 
-function renderNotes(notes){
-    let days = document.getElementById("day")
+function renderDays(days){
+    let dCon = document.getElementById("day");
+
+    days.forEach(function(day){
+        let li = document.createElement("li");
+
+        li.innerHTML = day.name + ", " + day.date;
+        dCon.appendChild(li);
+
+        let notes = document.createElement("ol");
+        day.notes.forEach(function(note){
+            let nli = document.createElement("li");
+            
+            nli.innerHTML = note.name + ", " + note.description;
+            notes.appendChild(nli);
+        })
+        dCon.appendChild(notes)
+    });
 }
 
-function fetchNotes(){
+function fetchDays(){
 
-    const url = "https://localhost:3000/notes";
+    const url = "http://localhost:3000/days";
     fetch(url)
     .then(resp => resp.json())
-    .then(json => renderNotes(json))
+    .then(json => renderDays(json))
 
 
 }
