@@ -7,13 +7,45 @@
         <link rel='stylesheet' type="text/css" href='fullcalendar-3.9.0/fullcalendar.css' />
         <script src='fullcalendar-3.9.0/fullcalendar.js'></script>
         <script type="text/javascript" src='src/index.js'></script>
-        <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <script type="text/javascript" src='src/day.js'></script>
         <script type="text/javascript" src='src/calendar.js'></script>
-
+        <script type="text/javascript" src='src/adapter.js'></script>
+        <script type="text/javascript" src='src/controller.js'></script>
+        <script type="text/javascript" src='src/note.js'></script>
         <title>CalendarApp</title>
     </head>
     <body>
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2>NOTED</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="bs-component">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light text">
+              <div class="collapse navbar-collapse" id="navbarColor03">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">+ Add A Note <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a id= "calendarButton" class="nav-link" href="#">Show My Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                    </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search Notes</button>
+                  </form>
+                </div>
+            </nav>
+          </div>
+        </div>
+      </div>
       <div id='calendar'></div>
     </body>
 </html>
