@@ -13,7 +13,6 @@ $(function() {
       }
     }
   });
-  hideCalendar()
   calendarButtonListener()
 });
 
@@ -36,4 +35,21 @@ $(function() {
 }
   function calendarButtonListener(){
     $('#calendarButton').click(toggleCalendar)
+  }
+
+class Calendar{
+    static RenderCalendar(){
+      let container = $('#lobby-container')
+      debugger
+      container.html('')
+      let calendarDiv = $('<div>')
+      calendarDiv.attr("id", "calendar")
+      container.append(calendarDiv)
+    }
+
+    static HideCalendar(){
+      $('#calendarButton').click(function(){
+        $('#calendar').hide()
+      })
+    }
   }

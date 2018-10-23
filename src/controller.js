@@ -2,21 +2,13 @@
 class Controller {
 
     static init(){
-
         // on page load
         Adapter.fetchNotes()
         .then(json => Controller.renderNotes(json))
-
-        Controller.hideForm()
         Controller.formListener()
-        Controller.formDate()
-
-
     }
-
     static renderNotes(notes){
         let container = $('#note-container')
-        debugger;
         notes.forEach(function(note){
 
             let n = new Note(note.day_id,note.name,note.description,note.id)
@@ -30,18 +22,15 @@ class Controller {
 
 
     }
-
-
     static hideForm() {
       let noteForm = $("#note-form")[0];
-      noteForm.style.visibility = "hidden"
+      noteForm.css = ("display","none")
     }
 
     static formListener(){
-      let noteForm = $("#note-form")[0];
       $('#add-a-note-button').click(function(event){
-        event.preventDefault()
-        noteForm.style.visibility = "visible"
+        NoteForm.Render()
+        Controller.formDate()
       })
     }
 
