@@ -15,7 +15,7 @@ function renderDays(days){
         let notes = document.createElement("ol");
         day.notes.forEach(function(note){
             let nli = document.createElement("li");
-            
+
             nli.innerHTML = note.name + ", " + note.description;
             notes.appendChild(nli);
         })
