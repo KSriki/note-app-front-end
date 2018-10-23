@@ -1,28 +1,4 @@
 
-$(function(){
-// on page load
-hideForm()
-formListener()
-formDate()
-})
-
-function hideForm() {
-  let noteForm = $("#note-form")[0];
-  noteForm.style.visibility = "hidden"
-}
-
-function formListener(){
-  let noteForm = $("#note-form")[0];
-  $('#add-a-note-button').click(function(event){
-    event.preventDefault()
-    noteForm.style.visibility = "visible"
-  })
-}
-
-function formDate(){
-  $('#myDate')[0].value = moment().format('YYYY-MM-DD')
-  }
-
 class Controller {
 
     static init(){
@@ -31,12 +7,16 @@ class Controller {
         Adapter.fetchNotes()
         .then(json => Controller.renderNotes(json))
 
+        Controller.hideForm()
+        Controller.formListener()
+        Controller.formDate()
 
 
     }
 
     static renderNotes(notes){
         let container = $('#note-container')
+        debugger;
         notes.forEach(function(note){
 
             let n = new Note(note.day_id,note.name,note.description,note.id)
@@ -52,8 +32,24 @@ class Controller {
     }
 
 
+    static hideForm() {
+      let noteForm = $("#note-form")[0];
+      noteForm.style.visibility = "hidden"
+    }
+
+    static formListener(){
+      let noteForm = $("#note-form")[0];
+      $('#add-a-note-button').click(function(event){
+        event.preventDefault()
+        noteForm.style.visibility = "visible"
+      })
+    }
+
+    static formDate(){
+      $('#myDate')[0].value = moment().format('YYYY-MM-DD')
+     }
+
+
+
 
 }
-
-
-
