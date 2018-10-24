@@ -58,24 +58,55 @@ class NoteForm {
       container.html('')
       Controller.renderNotes(Calendar.all.notes);
     })
+
+  }
+  static SubmitNew(){
     $("#add-note-form").submit(function(event){
         event.preventDefault();
-        debugger;
         let note = {
             "name": $("#name-input").val(),
             "description": $("#add-description").val(),
-            "day_id": 2
+            "day_id": 2,
+            "type_id": 1
+            //make it so u permit but dont require day/type
         }
         Adapter.fetchPostNotes(note);
+        let container = $('#lobby-container')
         container.html('')
         Controller.createNote(note)
         Controller.renderNotes(Calendar.all.notes);
     })
-
-
-//     '"id": 1,
-// "name": "Fishing",
-// "description": "we going fishing at this day",
-// "day_id": 1,')
   }
+
+
+  static EditForm(note){
+    NoteForm.RenderForm()
+    //this allows to pass the id through the submission and patch
+    $("#add-note-form").attr("data-id", note.id)
+    //have input values already rendered in inputs to edit
+    $('#name-input').val(note.name)
+    $('#add-description').val(note.description)
+    // add day/date/other inputs if applicable (type etc)
+    $("#add-note-form").submit(function (event){
+        event.preventDefault();
+        let id = $("#add-note-form").attr("data-id")
+        let note = {
+            "id" : id,
+            "name": $("#name-input").val(),
+            "description": $("#add-description").val(),
+            "day_id": 2,
+            "type_id": 1
+        }
+        Adapter.PatchNote(note)
+        let container = $('#lobby-container')
+        container.html('')
+        Controller.EditNote(note)
+        Controller.renderNotes(Calendar.all.notes);
+    })
+  }
+
+  
+
+
+
 }

@@ -1,6 +1,4 @@
 class Calendar{
-
-
     static RenderCalendar(){
       let container = $('#lobby-container')
       container.html('')
