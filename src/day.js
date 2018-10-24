@@ -1,4 +1,3 @@
-
 let calendar = { days: [], notes: []}
 
 class Day {
@@ -27,7 +26,6 @@ class Note {
     }
 
     render(){
-
         let card = `
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-body">
@@ -38,6 +36,5 @@ class Note {
         </div>`
         //add listener for the edit button in controller
         return card;
-
     }
 }
