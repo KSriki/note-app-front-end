@@ -1,5 +1,3 @@
 $(function(){
-
     Controller.init();
-
 })

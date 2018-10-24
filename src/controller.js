@@ -6,6 +6,8 @@ class Controller {
         Adapter.fetchNotes()
         .then(json => Controller.renderNotes(json))
         Controller.formListener()
+        Calendar.ToggleCalendar()
+
     }
     static renderNotes(notes){
         let container = $('#note-container')
@@ -29,7 +31,7 @@ class Controller {
 
     static formListener(){
       $('#add-a-note-button').click(function(event){
-        NoteForm.Render()
+        NoteForm.RenderForm()
         Controller.formDate()
       })
     }
