@@ -10,7 +10,6 @@ class Adapter {
     }
 
     static fetchPostNotes(note){
-        debugger;
         const url = "http://localhost:3000/notes";
         return fetch(url,{
             method: "POST",
@@ -21,10 +20,26 @@ class Adapter {
             body: JSON.stringify(note)
         })
         .then(resp => resp.json())
-
-
+        .then(json => console.log(json))
     }
 
+    static PatchNote(note){
+      const url = `http://localhost:3000/notes/${note.id}`
+      return fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(note)
+      })
+      .then(resp => resp.json())
+    }
 
-
+    static DeleteNote(note){
+      const url = `http://localhost:3000/notes/${note.id}`
+      return fetch(url, {
+        method: "DELETE"
+      })
+    }
 }

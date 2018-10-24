@@ -14,6 +14,19 @@ class Controller {
         let n = new Note(note.day_id,note.name,note.description,note.id)
     }
 
+    static EditNote(note){
+    Calendar.all.notes.find(function(element){
+      if(element.id == note.id){
+        element.name = note.name
+        element.description = note.description
+        element.day_id = note.day_id
+      }
+      // put rest - day id type id etc
+      // debugger
+
+    })
+    }
+
     static createNotes(notes){
         notes.forEach(function(note){
             Controller.createNote(note);
@@ -43,9 +56,16 @@ class Controller {
             noteDiv.id =`note-${note.id}`
             noteDiv.innerHTML = note.render();
             container.append(noteDiv);
+            // edit listener
+            $(`#edit-${note.id}`).click(function(event){
+              NoteForm.EditForm(note)
         })
-
-    }
+            $(`#delete-${note.id}`).click(function(event){
+              this.parentElement.parentElement.remove()
+              Adapter.DeleteNote(note)
+            })
+      })
+  }
     static hideForm() {
       let noteForm = $("#note-form")[0];
       noteForm.css = ("display","none")
@@ -55,6 +75,7 @@ class Controller {
       $('#add-a-note-button').click(function(event){
         NoteForm.RenderForm()
         Controller.formDate()
+        NoteForm.SubmitNew()
       })
     }
 
