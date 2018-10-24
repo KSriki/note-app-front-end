@@ -1,54 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="node_modules/moment/moment.js"></script>
-        <link rel='stylesheet' type="text/css" href='fullcalendar-3.9.0/fullcalendar.css' />
-        <script src='fullcalendar-3.9.0/fullcalendar.js'></script>
-        <script type="text/javascript" src='src/index.js'></script>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <script type="text/javascript" src='src/day.js'></script>
-        <script type="text/javascript" src='src/note.js'></script>
-        <script type="text/javascript" src='src/calendar.js'></script>
-        <script type="text/javascript" src='src/adapter.js'></script>
-        <script type="text/javascript" src='src/controller.js'></script>
-        <script type="text/javascript" src='src/noteform.js'></script>
-        <title>CalendarApp</title>
-    </head>
-    <body>
-      <div class="row">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="node_modules/moment/moment.js"></script>
+    <link rel='stylesheet' type="text/css" href='fullcalendar-3.9.0/fullcalendar.css' />
+    <script src='fullcalendar-3.9.0/fullcalendar.js'></script>
+    <script type="text/javascript" src='src/index.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src='src/day.js'></script>
+    <script type="text/javascript" src='src/note.js'></script>
+    <script type="text/javascript" src='src/calendar.js'></script>
+    <script type="text/javascript" src='src/adapter.js'></script>
+    <script type="text/javascript" src='src/controller.js'></script>
+    <script type="text/javascript" src='src/noteform.js'></script>
+    <title>CalendarApp</title>
+</head>
+
+<body>
+
+    <div class="row">
         <div class="col-12 text-center">
-          <h2>NOTED</h2>
+            <h2>NOTED</h2>
         </div>
-      </div>
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
-          <div class="bs-component">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light text">
-              <div class="collapse navbar-collapse" id="navbarColor03">
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a id="add-a-note-button"class="nav-link" href="#">+ Add A Note <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a id= "calendarButton" class="nav-link" href="#">Show My Calendar</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">About</a>
-                    </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search Notes</button>
-                  </form>
-                </div>
-            </nav>
-          </div>
+            <div class="bs-component">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light text">
+                    <div class="collapse navbar-collapse" id="navbarColor03">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="add-a-note-button">
+                                New Note
+                          </button>
+
+                            </li>
+                            <li class="nav-item">
+                                <a id="calendarButton" class="nav-link" href="#">Show My Calendar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search Notes</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
         </div>
-      </div>
-      <div id="lobby-container" class="fluid-container">
-      </div>
-      </div>
-    </body>
+    </div>
+    <div id="lobby-container" class="fluid-container">
+    </div>
+
+
+
+
+</body>
+
 </html>
