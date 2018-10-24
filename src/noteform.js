@@ -54,7 +54,8 @@ class NoteForm {
       class: 'btn btn-outline-primary btn-sm'
     })
     $('#legend').append(cancelButton)
-
-
+    cancelButton.click(function(){
+      container.html('')
+    })
   }
 }
