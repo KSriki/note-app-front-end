@@ -7,16 +7,16 @@ class NoteForm {
         <div class="col-3"></div>
         <div class="col-6 text-center">
           <div class="bs-component">
-            <form>
+            <form id="add-note-form">
             <fieldset>
             <legend id="legend">ADD A NOTE</legend>
             <div class="form-group">
             <label for="note-name" class="col-12 col-form-label">Name of Note</label>
-            <input class="col-6"type="note-name-input" class="form-control" id="name-input" placeholder="Enter A Name For This Note">
+            <input class="col-6" type="note-name-input" class="form-control" name="name-input" id="name-input" placeholder="Enter A Name For This Note">
             </div>
             <div class="form-group">
             <label for="note-description" class="col-12 col-form-label">Note Description</label>
-            <textarea rows="4" cols="50">
+            <textarea rows="4" cols="50" id="add-description">
             </textarea>
             </div>
               <div class="form-group">
@@ -56,6 +56,26 @@ class NoteForm {
     $('#legend').append(cancelButton)
     cancelButton.click(function(){
       container.html('')
+      Controller.renderNotes(Calendar.all.notes);
     })
+    $("#add-note-form").submit(function(event){
+        event.preventDefault();
+        debugger;
+        let note = {
+            "name": $("#name-input").val(),
+            "description": $("#add-description").val(),
+            "day_id": 2
+        }
+        Adapter.fetchPostNotes(note);
+        container.html('')
+        Controller.createNote(note)
+        Controller.renderNotes(Calendar.all.notes);
+    })
+
+
+//     '"id": 1,
+// "name": "Fishing",
+// "description": "we going fishing at this day",
+// "day_id": 1,')
   }
 }

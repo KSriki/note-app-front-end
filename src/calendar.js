@@ -1,4 +1,6 @@
 class Calendar{
+
+
     static RenderCalendar(){
       let container = $('#lobby-container')
       container.html('')
@@ -31,7 +33,10 @@ class Calendar{
       else if (calendarButton.html() === "Hide My Calendar"){
         calendarButton.html('Show My Calendar')
         $('#calendar').hide()
+        Controller.renderNotes(Calendar.all.notes)
       }
     })
   }
 }
+
+Calendar.all = { days: [], notes: []}
