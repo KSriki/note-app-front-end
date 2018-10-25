@@ -43,27 +43,6 @@ class NoteForm {
 
 
                           </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-3">
-                            </div>
-                            <div class="col-6">
-                              <label for="note-type">Type of Note</label>
-                              <select class="form-control" id="exampleSelect1">
-                              <option>add all types with javascript</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-
-                      <div id="calendar-container" class="form-group">
-                        <input type="date" id="myDate" value="">
-                      </div>
-
                       </form>
                     </div>
                   </div>
@@ -135,15 +114,42 @@ class NoteForm {
 
     static RenderExtraFeatures(){
       let divContainer = $('#extra-features')
+      let extraFeaturesArea = $('#extra-features-area')
+      divContainer.html('')
       let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
-      let addDate = $('<option>').attr('value', "add Date").attr('id', 'add-Date').html('Add Date')
+      let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
+      let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
+      let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
+
+      selectMenu.append(addFeature)
       selectMenu.append(addDate)
-      $('#add-Date').click(function(){
+      selectMenu.append(addType)
+
+      selectMenu.on('change', function(event){
+        if (event.target.value === "Add-Date"){
+          extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
+              <input type="date" id="myDate" value="">
+            </div>`)
+          }
+        else if (event.target.value === "Add-Type"){
+          extraFeaturesArea.append(`<div class="form-group">
+            <div class="row">
+              <div class="col-3">
+              </div>
+              <div class="col-6">
+                <label for="note-type">Type of Note</label>
+                <select class="form-control" id="exampleSelect1">
+                <option>add all types with javascript</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </select>
+              </div>
+            </div>
+          </div>`)
+        }
         debugger
       })
-
     }
-
-
-
 }
