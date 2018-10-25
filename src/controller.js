@@ -48,10 +48,11 @@ class Controller {
 
     static renderNote(note) {
         let container = $('#lobby-container')
-        let noteDiv = document.createElement("div")
+        let row = $('#lobby-row')
+        let noteDiv = $('<div class="col-md-2"></div>')
         noteDiv.id = `note-${note.id}`
-        noteDiv.innerHTML = note.render();
-        container.append(noteDiv);
+        noteDiv.html(note.render());
+        row.append(noteDiv);
         // edit listener
         $(`#edit-${note.id}`).click(function(event) {
             NoteForm.EditForm(note)
@@ -64,7 +65,8 @@ class Controller {
 
     static renderNotes(notes) {
         let container = $('#lobby-container')
-        container.html('')
+        let row = $('#lobby-row')
+        row.html('')
         notes.forEach(Controller.renderNote)
     }
 
@@ -81,8 +83,8 @@ class Controller {
         })
     }
 
-    static formDate() {
-        $('#myDate')[0].value = moment().format('YYYY-MM-DD')
-    }
+    // static formDate() {
+    //     $('#myDate')[0].value = moment().format('YYYY-MM-DD')
+    // }
 
 }

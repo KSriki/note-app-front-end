@@ -20,10 +20,10 @@ class Calendar{
     }
 
     static ToggleCalendar(){
-      let container = $('#lobby-container')
-      container.html('')
       let calendarButton = $('#calendarButton')
       calendarButton.click(function(){
+        let container = $('#lobby-container')
+        container.html('')
         if (calendarButton.html() === "Show My Calendar"){
           calendarButton.html('Hide My Calendar')
           Calendar.RenderCalendar()
