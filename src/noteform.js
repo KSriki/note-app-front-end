@@ -30,6 +30,19 @@ class NoteForm {
                       <textarea rows="4" cols="50" id="add-description">
                       </textarea>
                       </div>
+                          <div id="extra-features-area">
+
+
+
+
+                          </div>
+
+                          <div id="extra-features">
+
+
+
+
+                          </div>
                         <div class="form-group">
                           <div class="row">
                             <div class="col-3">
@@ -65,6 +78,7 @@ class NoteForm {
     </div>
 `)
         container.append(formDiv)
+        NoteForm.RenderExtraFeatures()
 
         // let cancelButton = $('<button/>', {
         //     type: 'button',
@@ -79,10 +93,7 @@ class NoteForm {
         // })
     }
     static SubmitNew() {
-        debugger;
         $("#submit-note").click(function() {
-
-            debugger;
             let note = {
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
@@ -90,7 +101,6 @@ class NoteForm {
             }
             Adapter.fetchPostNotes(note);
             Controller.createNote(note)
-            debugger;
             Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length-1]);
         })
 
@@ -122,5 +132,18 @@ class NoteForm {
             Controller.renderNotes(Calendar.all.notes);
         })
     }
+
+    static RenderExtraFeatures(){
+      let divContainer = $('#extra-features')
+      let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
+      let addDate = $('<option>').attr('value', "add Date").attr('id', 'add-Date').html('Add Date')
+      selectMenu.append(addDate)
+      $('#add-Date').click(function(){
+        debugger
+      })
+
+    }
+
+
 
 }
