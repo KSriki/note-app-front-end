@@ -29,28 +29,24 @@ class NoteForm {
                       <label for="note-description" class="col-12 col-form-label">Note Description</label>
                       <textarea rows="4" cols="50" id="add-description"></textarea>
                       </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-3">
-                            </div>
-                            <div class="col-6">
-                              <label for="note-type">Type of Note</label>
-                              <select class="form-control" id="exampleSelect1">
-                              <option>add all types with javascript</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              </select>
-                            </div>
+                          <div id="extra-features-area">
+
+
+
+
                           </div>
-                        </div>
 
                       <div id="calendar-container" class="form-group">
                         <input type="date" id="myDate" value="">
                       </div>
                       <input type="submit" class="btn btn-primary" id="submit-note">
                       <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
+                          <div id="extra-features">
+
+
+
+
+                          </div>
                       </form>
                     </div>
                   </div>
@@ -62,6 +58,7 @@ class NoteForm {
     </div>
 `)
         container.append(formDiv)
+        NoteForm.RenderExtraFeatures()
 
         // let cancelButton = $('<button/>', {
         //     type: 'button',
@@ -98,6 +95,8 @@ class NoteForm {
                     alert("Please enter a name and description");
                     return;
                 }
+
+        $("#submit-note").click(function() {
             let note = {
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
@@ -123,8 +122,6 @@ class NoteForm {
 
 
             });
-
-
 
 
         })
@@ -160,4 +157,44 @@ class NoteForm {
         })
     }
 
+    static RenderExtraFeatures(){
+      let divContainer = $('#extra-features')
+      let extraFeaturesArea = $('#extra-features-area')
+      divContainer.html('')
+      let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
+      let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
+      let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
+      let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
+
+      selectMenu.append(addFeature)
+      selectMenu.append(addDate)
+      selectMenu.append(addType)
+
+      selectMenu.on('change', function(event){
+        if (event.target.value === "Add-Date"){
+          extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
+              <input type="date" id="myDate" value="">
+            </div>`)
+          }
+        else if (event.target.value === "Add-Type"){
+          extraFeaturesArea.append(`<div class="form-group">
+            <div class="row">
+              <div class="col-3">
+              </div>
+              <div class="col-6">
+                <label for="note-type">Type of Note</label>
+                <select class="form-control" id="exampleSelect1">
+                <option>add all types with javascript</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </select>
+              </div>
+            </div>
+          </div>`)
+        }
+        debugger
+      })
+    }
 }
