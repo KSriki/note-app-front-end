@@ -24,7 +24,7 @@ class Note {
     }
 
     render(){
-      let card
+      let card = ''
       if (this.type_id == 1) {
         card += `
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">

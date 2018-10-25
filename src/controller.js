@@ -10,6 +10,7 @@ class Controller {
         })
         Controller.formListener()
         Calendar.ToggleCalendar()
+        Controller.searchListener()
 
     }
 
@@ -75,7 +76,6 @@ class Controller {
         noteDiv.id = `note-${note.id}`
         noteDiv.html(note.render());
         row.append(noteDiv);
-        debugger
         // edit listener
         $(`#edit-${note.id}`).click(function(event) {
             NoteForm.EditForm(note)
@@ -103,6 +103,19 @@ class Controller {
           NoteForm.RenderForm()
           NoteForm.SubmitNewListener()
             })
+    }
+
+    static searchListener(){
+      let searchInput = $('#search-input')
+      searchInput.keypress(function(event){
+        let row = $('#lobby-row')
+        row.html('')
+        let searchTerm = event.key
+        if (searchTerm !== ''){
+          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
+        }
+
+      })
     }
 
     // static formDate() {
