@@ -1,7 +1,6 @@
 class NoteForm {
     static RenderForm() {
         let container = $('#lobby-container')
-
         let formDiv = $('<div>')
         formDiv.html(`<div id="note-form" class="row">
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -53,8 +52,9 @@ class NoteForm {
       </div>
     </div>
 `)
+$('#exampleModal').modal('toggle')
         container.append(formDiv)
-        NoteForm.SubmitNew()
+        NoteForm.cancelListener()
         NoteForm.RenderExtraFeatures()
 
         // let cancelButton = $('<button/>', {
@@ -69,24 +69,25 @@ class NoteForm {
         //   Controller.renderNotes(Calendar.all.notes);
         // })
     }
-    static SubmitNew() {
-        // debugger;
-        $(".modal").on("hidden.bs.modal", function(e) {
 
-            $("#name-input").val("");
-            $("#add-description").val("");
-        });
+    static cancelListener(){
+      $(".modal").on("hidden.bs.modal", function(e) {
 
-        $('#cancel-form').click(function(e) {
+          $("#name-input").val("");
+          $("#add-description").val("");
+          $('#add-note-form').off("submit")
+          $('#add-a-note-button').off("click")
+          Controller.formListener()
+      });
 
-            // debugger;
-            $('#exampleModal').modal('toggle');
-        })
+      $('#cancel-form').click(function(e) {
+          $('#exampleModal').modal('toggle');
+      })
+    }
+    static SubmitNewListener() {
         $('#add-note-form').submit(function(e) {
-
             // do something here
             e.preventDefault();
-            // debugger;
             // debugger;
 
             if ($("#name-input").val() && $("#add-description").val()) {
@@ -109,20 +110,17 @@ class NoteForm {
 
 
                 Adapter.fetchPostNotes(note)
-
-                    $('#add-note-form').off("submit");
+                    // $('#add-note-form').off("submit");
                     Controller.createNote(note)
-                    // debugger;
+
                     Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
-                    // debugger;
-                    //
+                    $('#exampleModal').modal('toggle');
                     //  $(this).on('submit', function (evt) {
                     //          evt.preventDefault();
                     // });
                     // $("input[type='submit']", this).attr('disabled', 'disabled');
                     // e.target.reset();
                     // $('#exampleModal').modal('toggle');
-
             } else {
                 alert("Please enter a name and description");
             }
@@ -131,8 +129,9 @@ class NoteForm {
     }
 
     static EditForm(note) {
-        NoteForm.RenderForm()
-        //this allows to pass the id through the submission and patch
+      NoteForm.RenderForm()
+      debugger
+        // this allows to pass the id through the submission and patch
         $("#add-note-form").attr("data-id", note.id)
         //have input values already rendered in inputs to edit
         $('#name-input').val(note.name)
@@ -203,9 +202,7 @@ class NoteForm {
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
-                </div>`)
-
-
+            </div>`)
                 $('#delete-type-button').click(function() {
                     this.parentNode.remove()
                 })
