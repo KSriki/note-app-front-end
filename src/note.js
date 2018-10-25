@@ -25,7 +25,6 @@ class Note {
 
     render(){
       let card = ''
-      debugger
       if (this.getType().name == "Urgent") {
         card += `
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
