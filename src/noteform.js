@@ -70,7 +70,7 @@ class NoteForm {
     }
     static SubmitNew() {
         // debugger;
-        $(".modal").on("hidden.bs.modal", function(e){
+        $(".modal").on("hidden.bs.modal", function(e) {
 
             $("#name-input").val("");
             $("#add-description").val("");
@@ -81,7 +81,7 @@ class NoteForm {
             // debugger;
             $('#exampleModal').modal('toggle');
         })
-        $('#add-note-form').submit( function(e) {
+        $('#add-note-form').submit(function(e) {
 
             // do something here
             e.preventDefault();
@@ -95,10 +95,10 @@ class NoteForm {
                     "day_id": 2,
                     "type_id": 1
                 }
-                Adapter.fetchPostNotes(note).then(function(n){
+                Adapter.fetchPostNotes(note)
 
                     $('#add-note-form').off("submit");
-                    Controller.createNote(n)
+                    Controller.createNote(note)
                     debugger;
                     Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
                     debugger;
@@ -109,12 +109,10 @@ class NoteForm {
                     // $("input[type='submit']", this).attr('disabled', 'disabled');
                     // e.target.reset();
                     // $('#exampleModal').modal('toggle');
-                })
-            }
-            else{
+
+            } else {
                 alert("Please enter a name and description");
             }
-
 
         })
     }
@@ -160,69 +158,44 @@ class NoteForm {
         selectMenu.append(addType)
 
         selectMenu.on('change', function(event) {
-            if (event.target.value === "Add-Date") {
-                extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
-              <input type="date" id="myDate" value="">
-            </div>`)
-            } else if (event.target.value === "Add-Type") {
-                extraFeaturesArea.append(`<div class="form-group">
-
-    static RenderExtraFeatures(){
-      let divContainer = $('#extra-features')
-      let extraFeaturesArea = $('#extra-features-area')
-      divContainer.html('')
-      let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
-      let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
-      let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
-      let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
-
-      selectMenu.append(addFeature)
-      selectMenu.append(addDate)
-      selectMenu.append(addType)
-
-      selectMenu.on('change', function(event){
-        let dateFeature = $('#add-date-feature')
-        let typeFeature = $('#add-type-feature')
-        if (extraFeaturesArea[0].contains(dateFeature[0])){
-          // do nothing
-        }
-        else if (event.target.value === "Add-Date"){
-            extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
-                <input type="date" id="myDate" value="">
-                <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
-              </div>`)
+            let dateFeature = $('#add-date-feature')
+            let typeFeature = $('#add-type-feature')
+            if (extraFeaturesArea[0].contains(dateFeature[0])) {
+                // do nothing
+            } else if (event.target.value === "Add-Date") {
+                extraFeaturesArea.append(` < div id = "add-date-feature" class = "form-group" > <input type="date" id="myDate" value="">
+                    <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
+                </div>`)
             }
-              $('#delete-date-button').click(function(){
+            $('#delete-date-button').click(function() {
                 this.parentNode.remove()
-              })
-         if (extraFeaturesArea[0].contains(typeFeature[0])){
-           // do nothing
-        }
-        else if (event.target.value === "Add-Type"){
-          extraFeaturesArea.append(`<div id="add-type-feature"class="form-group">
-            <div class="row">
-              <div class="col-3">
-              </div>
-              <div class="col-6">
-                <label for="note-type">Type of Note</label>
-                <select class="form-control" id="exampleSelect1">
-                <option>add all types with javascript</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </select>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
-          </div>`)
+            })
+            if (extraFeaturesArea[0].contains(typeFeature[0])) {
+                // do nothing
+            } else if (event.target.value === "Add-Type") {
+                extraFeaturesArea.append(` < div id = "add-type-feature" class = "form-group" > <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <label for="note-type">Type of Note</label>
+                        <select class="form-control" id="exampleSelect1">
+                            <option>add all types with javascript</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
+            </div>`)
+
+                debugger
+                $('#delete-type-button').click(function() {
+                    this.parentNode.remove()
+                })
             }
-            debugger
         })
-          $('#delete-type-button').click(function(){
-            this.parentNode.remove()
-          })
-        }
-      })
+
     }
+
 }
