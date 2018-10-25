@@ -20,7 +20,7 @@ class Adapter {
             body: JSON.stringify(note)
         })
         .then(resp => resp.json())
-        
+
     }
 
     static PatchNote(note){
@@ -41,5 +41,18 @@ class Adapter {
       return fetch(url, {
         method: "DELETE"
       })
+    }
+
+    static PostDay(day){
+        const url = "http://localhost:3000/days";
+        return fetch(url,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(day)
+        })
+        .then(resp => resp.json())
     }
 }

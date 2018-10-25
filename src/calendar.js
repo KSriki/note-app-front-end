@@ -1,7 +1,7 @@
 class Calendar{
     static RenderCalendar(){
       let container = $('#lobby-container')
-      container.html('')
+      // container.html('')
       let calendarDiv = $('<div>')
       calendarDiv.attr("id", "calendar")
       container.append(calendarDiv)
@@ -31,8 +31,18 @@ class Calendar{
       else if (calendarButton.html() === "Hide My Calendar"){
         calendarButton.html('Show My Calendar')
         $('#calendar').hide()
+        container.append(`<div id="lobby-row" class="row"></div>`);
         Controller.renderNotes(Calendar.all.notes)
       }
     })
   }
+
+  static findDay(day){
+
+      return Calendar.all.days.find(d => {
+          return d.date === day
+      })
+  }
 }
+
+Calendar.weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
