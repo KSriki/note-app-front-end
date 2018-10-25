@@ -2,7 +2,7 @@ class Controller {
 
     static init() {
         // on page load
-        Calendar.all = { days: [], notes: [], types:[]}
+        Calendar.all = { days: [], notes: [], types:[], cals:[]}
         Adapter.fetchNotes().then(json => {
             Controller.createDaysFromNotes(json);
             Controller.loadTypesAndHandleNotes(json);
@@ -46,6 +46,11 @@ class Controller {
 
     static createNote(note) {
         let n = new Note(note.day_id, note.name, note.description, note.id,note.type_id)
+        if(n.day_id != 1){
+
+            //make calendar date 
+
+        }
     }
 
     static EditNote(note) {

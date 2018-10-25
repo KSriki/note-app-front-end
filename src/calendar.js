@@ -1,4 +1,6 @@
 class Calendar{
+
+
     static RenderCalendar(){
       let container = $('#lobby-container')
       // container.html('')
@@ -17,6 +19,7 @@ class Calendar{
           }
         }
       });
+      Calendar.loadNotes();
     }
 
     static ToggleCalendar(){
@@ -43,6 +46,22 @@ class Calendar{
           return d.date === day
       })
   }
+
+  static loadNotes(){
+    //   debugger;
+    //   let cals = $(".fc-day")
+    //   Calendar.all.notes.forEach(function(note){
+    //       let date = note.getDay().date
+    //
+    //
+    //   })
+    //
+    //
+    //   for(let i = 0; i < cals.length; i++){
+	// console.log(cals[i].dataset)
+// }
+  }
+
 }
 
 Calendar.weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
