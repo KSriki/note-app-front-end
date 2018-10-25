@@ -32,7 +32,8 @@ class Note {
                 <p class="card-text" data-id="${this.id}" id="descript-${this.id}">${this.description}</p>
                 `;
 
-        if (this.getDay().date.match(/-/g).length < 3){
+                // debugger;
+        if (this.getDay() && this.getDay().date.match(/-/g).length < 3){
             card += `<p class="card-text" data-id="${this.id}" id="descript-${this.id}">Day of the Week: ${this.getDay().name}</p>
             <p class="card-text" data-id="${this.id}" id="descript-${this.id}">Date: ${this.getDay().date}</p>`
         }
@@ -40,7 +41,7 @@ class Note {
             card += `<p class="card-text" data-id="${this.id}" id="descript-${this.id}">No day associated with this note.</p>`
         }
 
-
+        debugger;
             card+=  `<p id="type-${this.id}" data-typeid="${this.type_id}">${this.getType().name}</p>
                 <button id="edit-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Edit Note </button>
                 <button id="delete-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Delete Note </button>

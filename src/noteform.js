@@ -97,7 +97,6 @@ $('#exampleModal').modal('toggle')
                 let note = {
                     "name": $("#name-input").val(),
                     "description": $("#add-description").val(),
-                    "day_id": 1,
                 }
 
                 if($("#exampleSelect1") && !isNaN($("#exampleSelect1").val())){
@@ -106,21 +105,69 @@ $('#exampleModal').modal('toggle')
                 else{
                     note.type_id = 1;
                 }
-                // debugger;
 
 
-                Adapter.fetchPostNotes(note)
-                    // $('#add-note-form').off("submit");
-                    Controller.createNote(note)
+                if($("#myDate") && $("#myDate").val() ){
 
-                    Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
-                    $('#exampleModal').modal('toggle');
-                    //  $(this).on('submit', function (evt) {
-                    //          evt.preventDefault();
-                    // });
-                    // $("input[type='submit']", this).attr('disabled', 'disabled');
-                    // e.target.reset();
-                    // $('#exampleModal').modal('toggle');
+                    let dString = $("#myDate").val();
+
+                    let date = Calendar.findDay(dString);
+                    //date already exists
+
+                    if(date){
+                        note.day_id = date.id;
+                    }
+                    else{
+                        //post and make a new Date
+                        let newDate = new Date(dString);
+                        // debugger;
+                        let day = {
+                            name: Calendar.weekdays[newDate.getDay()],
+                            date: newDate
+
+                        }
+                        //so sketch
+
+                        Adapter.PostDay(day).then(newDay => {
+                                console.log(newDay);
+
+                                Controller.createDay(newDay);
+                                note.day_id = newDay.id;
+                                Adapter.fetchPostNotes(note).then(n =>
+                                {
+                                    debugger;
+                                    Controller.createNote(n)
+                                    Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                                    $('#exampleModal').modal('toggle');
+
+                                });
+                                // $('#add-note-form').off("submit");
+                        });
+
+                    }
+                    // dString
+                    // //find in database
+                    // note.day_id =
+                }
+                else{
+                    note.day_id = 1;
+                    debugger;
+                    Adapter.fetchPostNotes(note)
+                        // $('#add-note-form').off("submit");
+
+
+                        Controller.createNote(note)
+
+                        Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                        $('#exampleModal').modal('toggle');
+                        //  $(this).on('submit', function (evt) {
+                        //          evt.preventDefault();
+                        // });
+                        // $("input[type='submit']", this).attr('disabled', 'disabled');
+                        // e.target.reset();
+                        // $('#exampleModal').modal('toggle');
+                }
+
             } else {
                 alert("Please enter a name and description");
             }
