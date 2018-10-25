@@ -100,8 +100,8 @@ $('#exampleModal').modal('show')
                     "description": $("#add-description").val(),
                 }
 
-                if($("#exampleSelect1") && !isNaN($("#exampleSelect1").val())){
-                    note.type_id = +$("#exampleSelect1").val();
+                if($("#exampleSelect1")){
+                    note.type_id = $('#type-menu').val();
                 }
                 else{
                     note.type_id = 1;
@@ -136,7 +136,6 @@ $('#exampleModal').modal('show')
                                 note.day_id = newDay.id;
                                 Adapter.fetchPostNotes(note).then(n =>
                                 {
-                                    debugger;
                                     Controller.createNote(n)
                                     Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
                                     $('#exampleModal').modal('toggle');
@@ -179,6 +178,24 @@ $('#exampleModal').modal('show')
     static EditForm(note) {
       NoteForm.RenderForm()
       $('#exampleModal').modal()
+
+      let divContainer = $('#extra-features')
+      let extraFeaturesArea = $('#extra-features-area')
+      extraFeaturesArea.html('')
+
+        if (note.dayId > 1) {
+          extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
+          <input type="date" id="myDate" value='${note.dayId}'>
+              <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
+          </div>`)
+
+          $('#myDate').val(note.getDay().date)
+          $('#delete-date-button').click(function() {
+              this.parentNode.remove()
+          })
+        }
+
+      
         // this allows to pass the id through the submission and patch
         $("#add-note-form").attr("data-id", note.id)
         //have input values already rendered in inputs to edit
@@ -200,17 +217,21 @@ $('#exampleModal').modal('show')
             let row = $('#lobby-row')
             row.html('')
             Controller.EditNote(note)
-            Controller.renderNotes(Calendar.all.notes);
+            Controller.renderNotes(Calendar.all.notes)
+            $('#exampleModal').modal('toggle');
+;
         })
     }
+
 
     static RenderExtraFeatures() {
         let divContainer = $('#extra-features')
         let extraFeaturesArea = $('#extra-features-area')
         extraFeaturesArea.html('')
         divContainer.html('')
-        let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
-        let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
+        divContainer.html('Add A Feature')
+        let selectMenu = $('<select id= "features-menu"> </select>').appendTo(divContainer)
+        let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('')
         let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
         let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
 
@@ -241,17 +262,19 @@ $('#exampleModal').modal('show')
                     <div class="col-3"></div>
                     <div class="col-6">
                         <label for="note-type">Type of Note</label>
-                        <select class="form-control" id="exampleSelect1">
-                            <option>add all types with javascript</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select id="type-menu" class="form-control" id="exampleSelect1">
+
                         </select>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
             </div>`)
+
+                let typeMenu = $('#type-menu')
+                Calendar.all.types.forEach(type => {
+                let typeOption = $('<option>').attr('value', `${type.id}`).attr('id', `type-${type.name}`).html(type.name)
+                  typeMenu.append(typeOption)
+                })
                 $('#delete-type-button').click(function() {
                     this.parentNode.remove()
                 })
