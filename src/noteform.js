@@ -70,46 +70,56 @@ class NoteForm {
     }
     static SubmitNew() {
         // debugger;
+        $(".modal").on("hidden.bs.modal", function(e){
 
-        $('#cancel-form').click(function(){
-            // debugger;
             $("#name-input").val("");
             $("#add-description").val("");
+        });
+
+        $('#cancel-form').click(function(e) {
+
+            // debugger;
             $('#exampleModal').modal('toggle');
         })
+        $('#add-note-form').submit( function(e) {
 
-
-        $('#add-note-form').one('submit', function (e) {
-
-    // do something here
+            // do something here
             e.preventDefault();
             // debugger;
             // debugger;
 
-
-                if(!$("#name-input").val() || !$("#add-description").val()){
-                    alert("Please enter a name and description");
-                    return;
+            if ($("#name-input").val() && $("#add-description").val()) {
+                let note = {
+                    "name": $("#name-input").val(),
+                    "description": $("#add-description").val(),
+                    "day_id": 2,
+                    "type_id": 1
                 }
-            let note = {
-                "name": $("#name-input").val(),
-                "description": $("#add-description").val(),
-                "day_id": 2
-            }
-            Adapter.fetchPostNotes(note).then(function(note){
+                Adapter.fetchPostNotes(note).then(function(n){
 
-                Controller.createNote(note)
-                // debugger;
-                Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length-1]);
-                debugger;
-               //
-               //  $(this).on('submit', function (evt) {
-               //          evt.preventDefault();
-               // });
-               // $("input[type='submit']", this).attr('disabled', 'disabled');
-               e.target.reset();
-               $('#exampleModal').modal('toggle');
-            });
+                    $('#add-note-form').off("submit");
+                    Controller.createNote(n)
+                    debugger;
+                    Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                    debugger;
+                    //
+                    //  $(this).on('submit', function (evt) {
+                    //          evt.preventDefault();
+                    // });
+                    // $("input[type='submit']", this).attr('disabled', 'disabled');
+                    // e.target.reset();
+                    // $('#exampleModal').modal('toggle');
+                })
+
+
+
+
+            }
+            else{
+                alert("Please enter a name and description");
+            }
+
+
         })
     }
 
@@ -140,27 +150,26 @@ class NoteForm {
         })
     }
 
-    static RenderExtraFeatures(){
-      let divContainer = $('#extra-features')
-      let extraFeaturesArea = $('#extra-features-area')
-      divContainer.html('')
-      let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
-      let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
-      let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
-      let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
+    static RenderExtraFeatures() {
+        let divContainer = $('#extra-features')
+        let extraFeaturesArea = $('#extra-features-area')
+        divContainer.html('')
+        let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
+        let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
+        let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
+        let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
 
-      selectMenu.append(addFeature)
-      selectMenu.append(addDate)
-      selectMenu.append(addType)
+        selectMenu.append(addFeature)
+        selectMenu.append(addDate)
+        selectMenu.append(addType)
 
-      selectMenu.on('change', function(event){
-        if (event.target.value === "Add-Date"){
-          extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
+        selectMenu.on('change', function(event) {
+            if (event.target.value === "Add-Date") {
+                extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
               <input type="date" id="myDate" value="">
             </div>`)
-          }
-        else if (event.target.value === "Add-Type"){
-          extraFeaturesArea.append(`<div class="form-group">
+            } else if (event.target.value === "Add-Type") {
+                extraFeaturesArea.append(`<div class="form-group">
             <div class="row">
               <div class="col-3">
               </div>
@@ -176,8 +185,8 @@ class NoteForm {
               </div>
             </div>
           </div>`)
-        }
-        debugger
-      })
+            }
+            debugger
+        })
     }
 }

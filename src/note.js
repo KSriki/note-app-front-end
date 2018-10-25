@@ -1,7 +1,10 @@
 class Note {
+
+    //need to add type id
     constructor(day_id,name,description,id){
         this.dayId = day_id;
         this.id = id;
+
         this.name = name;
         this.description = description;
         Calendar.all.notes.push(this);

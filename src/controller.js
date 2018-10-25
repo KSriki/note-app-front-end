@@ -76,13 +76,13 @@ class Controller {
     static formListener() {
         $('#add-a-note-button').click(function(event) {
             NoteForm.RenderForm()
-            Controller.formDate()
+            // Controller.formDate()
             NoteForm.SubmitNew()
         })
     }
 
-    static formDate() {
-        $('#myDate')[0].value = moment().format('YYYY-MM-DD')
-    }
+    // static formDate() {
+    //     $('#myDate')[0].value = moment().format('YYYY-MM-DD')
+    // }
 
 }
