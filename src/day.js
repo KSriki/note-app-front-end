@@ -11,4 +11,8 @@ class Day {
             return note.dayId == this.id;
         });
     }
+    
+
+
+
 }

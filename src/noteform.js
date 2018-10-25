@@ -91,18 +91,30 @@ $('#exampleModal').modal('toggle')
             // debugger;
 
             if ($("#name-input").val() && $("#add-description").val()) {
+
+
+
                 let note = {
                     "name": $("#name-input").val(),
                     "description": $("#add-description").val(),
-                    "day_id": 2,
-                    "type_id": 1
+                    "day_id": 1,
                 }
+
+                if($("#exampleSelect1") && !isNaN($("#exampleSelect1").val())){
+                    note.type_id = +$("#exampleSelect1").val();
+                }
+                else{
+                    note.type_id = 1;
+                }
+                // debugger;
+
+
                 Adapter.fetchPostNotes(note)
                     // $('#add-note-form').off("submit");
                     Controller.createNote(note)
+
                     Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
                     $('#exampleModal').modal('toggle');
-
                     //  $(this).on('submit', function (evt) {
                     //          evt.preventDefault();
                     // });
@@ -163,17 +175,20 @@ $('#exampleModal').modal('toggle')
             if (extraFeaturesArea[0].contains(dateFeature[0])) {
                 // do nothing
             } else if (event.target.value === "Add-Date") {
-                extraFeaturesArea.append(` < div id = "add-date-feature" class = "form-group" > <input type="date" id="myDate" value="">
+                extraFeaturesArea.append(` <div id="add-date-feature" class="form-group">
+                <input type="date" id="myDate" value="">
                     <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
                 </div>`)
+                $('#delete-date-button').click(function() {
+                    this.parentNode.remove()
+                })
             }
-            $('#delete-date-button').click(function() {
-                this.parentNode.remove()
-            })
             if (extraFeaturesArea[0].contains(typeFeature[0])) {
                 // do nothing
             } else if (event.target.value === "Add-Type") {
-                extraFeaturesArea.append(` < div id = "add-type-feature" class = "form-group" > <div class="row">
+
+                extraFeaturesArea.append(`<div id="add-type-feature" class="form-group">
+                    <div class="row">
                     <div class="col-3"></div>
                     <div class="col-6">
                         <label for="note-type">Type of Note</label>
