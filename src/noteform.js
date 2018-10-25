@@ -152,7 +152,7 @@ $('#exampleModal').modal('show')
                 }
                 else{
                     note.day_id = 1;
-                    debugger;
+
                     Adapter.fetchPostNotes(note)
                         // $('#add-note-form').off("submit");
 

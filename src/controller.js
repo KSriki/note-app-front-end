@@ -5,8 +5,7 @@ class Controller {
         Calendar.all = { days: [], notes: [], types:[]}
         Adapter.fetchNotes().then(json => {
             Controller.createDaysFromNotes(json);
-            Controller.createTypesFromNotes(json);
-            Controller.createAndRenderNotes(json);
+            Controller.loadTypesAndHandleNotes(json);
         })
         Controller.formListener()
         Calendar.ToggleCalendar()
@@ -18,11 +17,17 @@ class Controller {
 
         let t = new Type(type.id,type.name)
     }
-    static createTypesFromNotes(notes){
 
-        notes.forEach(function(note) {
-            Controller.createType(note.type);
-        });
+    static createTypes(types){
+        types.forEach(Controller.createType);
+    }
+    static loadTypesAndHandleNotes(notes){
+
+        Adapter.fetchTypes().then(types => {
+            //set types not based on notes
+            Controller.createTypes(types);
+            Controller.createAndRenderNotes(notes);
+        })
     }
 
 
