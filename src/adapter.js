@@ -20,7 +20,7 @@ class Adapter {
             body: JSON.stringify(note)
         })
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        
     }
 
     static PatchNote(note){

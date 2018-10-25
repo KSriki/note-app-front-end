@@ -78,7 +78,7 @@ class Controller {
     static formListener() {
         $('#add-a-note-button').click(function(event) {
             NoteForm.RenderForm()
-            Controller.formDate()
+            // Controller.formDate()
             NoteForm.SubmitNew()
         })
     }
