@@ -35,18 +35,14 @@ class NoteForm {
 
 
                           </div>
-
-                      <div id="calendar-container" class="form-group">
-                        <input type="date" id="myDate" value="">
-                      </div>
-                      <input type="submit" class="btn btn-primary" id="submit-note">
-                      <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
                           <div id="extra-features">
 
 
 
 
                           </div>
+                      <input type="submit" class="btn btn-primary" id="submit-note">
+                      <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
                       </form>
                     </div>
                   </div>
@@ -95,17 +91,12 @@ class NoteForm {
                     alert("Please enter a name and description");
                     return;
                 }
-
-        $("#submit-note").click(function() {
             let note = {
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
                 "day_id": 2
             }
-
             Adapter.fetchPostNotes(note).then(function(note){
-
-
 
                 Controller.createNote(note)
                 // debugger;
@@ -118,16 +109,8 @@ class NoteForm {
                // $("input[type='submit']", this).attr('disabled', 'disabled');
                e.target.reset();
                $('#exampleModal').modal('toggle');
-
-
-
             });
-
-
         })
-        //
-
-
     }
 
     static EditForm(note) {
