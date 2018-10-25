@@ -74,11 +74,8 @@ class Controller {
         let noteDiv = $('<div class="col-md-2"></div>')
         noteDiv.id = `note-${note.id}`
         noteDiv.html(note.render());
-
-
         row.append(noteDiv);
-
-
+        debugger
         // edit listener
         $(`#edit-${note.id}`).click(function(event) {
             NoteForm.EditForm(note)

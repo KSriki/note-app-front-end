@@ -24,11 +24,24 @@ class Note {
     }
 
     render(){
-
-        let card = `
+      let card
+      if (this.type_id == 1) {
+        card += `
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div class="card-body">
-                <h4 class="card-title">${this.name}</h4>
+          <div class="card-body">`
+      }
+      else if (this.type_id == 2) {
+        card += `
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+          <div class="card-body">`
+      }
+      else if (this.type_id == 3) {
+        card += `
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+          <div class="card-body">`
+      }
+            card +=
+                `<h4 class="card-title">${this.name}</h4>
                 <p class="card-text" data-id="${this.id}" id="descript-${this.id}">${this.description}</p>
                 `;
 
@@ -47,6 +60,7 @@ class Note {
 
             </div>
         </div>`
+
         //add listener for the edit button in controller
         return card;
         }
