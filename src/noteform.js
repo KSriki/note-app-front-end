@@ -2,6 +2,7 @@ class NoteForm {
     static RenderForm() {
         let container = $('#lobby-container')
         let formDiv = $('<div>')
+
         formDiv.html(`<div id="note-form" class="row">
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -52,7 +53,7 @@ class NoteForm {
       </div>
     </div>
 `)
-$('#exampleModal').modal('toggle')
+$('#exampleModal').modal('show')
         container.append(formDiv)
         NoteForm.cancelListener()
         NoteForm.RenderExtraFeatures()
@@ -81,7 +82,7 @@ $('#exampleModal').modal('toggle')
       });
 
       $('#cancel-form').click(function(e) {
-          $('#exampleModal').modal('toggle');
+          $('#exampleModal').modal('hide');
       })
     }
     static SubmitNewListener() {
@@ -130,7 +131,7 @@ $('#exampleModal').modal('toggle')
 
     static EditForm(note) {
       NoteForm.RenderForm()
-      debugger
+      $('#exampleModal').modal()
         // this allows to pass the id through the submission and patch
         $("#add-note-form").attr("data-id", note.id)
         //have input values already rendered in inputs to edit
@@ -159,6 +160,7 @@ $('#exampleModal').modal('toggle')
     static RenderExtraFeatures() {
         let divContainer = $('#extra-features')
         let extraFeaturesArea = $('#extra-features-area')
+        extraFeaturesArea.html('')
         divContainer.html('')
         let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
         let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
