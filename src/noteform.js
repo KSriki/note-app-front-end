@@ -50,16 +50,14 @@ class NoteForm {
                       <div id="calendar-container" class="form-group">
                         <input type="date" id="myDate" value="">
                       </div>
-
+                      <button type="submit" class="btn btn-primary" id="submit-note">Submit</button>
+                      <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
                       </form>
                     </div>
                   </div>
               </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="submit-note">Submit</button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -79,10 +77,12 @@ class NoteForm {
         // })
     }
     static SubmitNew() {
-        debugger;
-        $("#submit-note").click(function() {
-
-            debugger;
+        // debugger;
+        $('#add-note-form').submit(function(e){
+    // do something here
+            e.preventDefault();
+            // debugger;
+            // debugger;
             let note = {
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
@@ -90,8 +90,14 @@ class NoteForm {
             }
             Adapter.fetchPostNotes(note);
             Controller.createNote(note)
-            debugger;
+            // debugger;
             Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length-1]);
+            e.target.reset();
+            $('#exampleModal').modal('toggle');
+        })
+
+        $('#cancel-form').click(function(){
+            $('#exampleModal').modal('toggle');
         })
 
     }
