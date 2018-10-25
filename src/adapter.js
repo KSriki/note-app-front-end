@@ -55,4 +55,13 @@ class Adapter {
         })
         .then(resp => resp.json())
     }
+
+    static fetchTypes(){
+
+        const url = "http://localhost:3000/types";
+        return fetch(url)
+        .then(resp => resp.json())
+
+
+    }
 }
