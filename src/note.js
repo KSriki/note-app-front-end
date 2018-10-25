@@ -25,19 +25,30 @@ class Note {
 
     render(){
       let card = ''
-      if (this.type_id == 1) {
+      debugger
+      if (this.getType().name == "Urgent") {
         card += `
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
           <div class="card-body">`
       }
-      else if (this.type_id == 2) {
+      else if (this.getType().name == "Work") {
+        card += `
+        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+          <div class="card-body">`
+      }
+      else if (this.getType().name == "Personal") {
         card += `
         <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
           <div class="card-body">`
       }
-      else if (this.type_id == 3) {
+      else if (this.getType().name == "Not Urgent") {
         card += `
-        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+        <div class="card border-info mb-3" style="max-width: 20rem;">
+          <div class="card-body">`
+      }
+      else {
+        card += `
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
           <div class="card-body">`
       }
             card +=
@@ -54,7 +65,6 @@ class Note {
             card += `<p class="card-text" data-id="${this.id}" id="descript-${this.id}">No day associated with this note.</p>`
         }
 
-        debugger;
             card+=  `<p id="type-${this.id}" data-typeid="${this.type_id}">${this.getType().name}</p>
                 <button id="edit-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Edit Note </button>
                 <button id="delete-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Delete Note </button>
