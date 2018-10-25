@@ -154,7 +154,10 @@ class NoteForm {
       selectMenu.append(addType)
 
       selectMenu.on('change', function(event){
-        if (event.target.value === "Add-Date"){
+        if (extraFeaturesArea[0].contains($('#calendar-container')) == true){
+          debugger
+        }
+        else if (event.target.value === "Add-Date"){
           extraFeaturesArea.append(`<div id="calendar-container" class="form-group">
               <input type="date" id="myDate" value="">
             </div>`)
