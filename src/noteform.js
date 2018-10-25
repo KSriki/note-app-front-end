@@ -110,10 +110,6 @@ class NoteForm {
                     // e.target.reset();
                     // $('#exampleModal').modal('toggle');
                 })
-
-
-
-
             }
             else{
                 alert("Please enter a name and description");
@@ -143,8 +139,8 @@ class NoteForm {
             }
             Adapter.PatchNote(note)
             //only change the note we want to change
-            let container = $('#lobby-container')
-            container.html('')
+            let row = $('#lobby-row')
+            row.html('')
             Controller.EditNote(note)
             Controller.renderNotes(Calendar.all.notes);
         })
@@ -170,6 +166,40 @@ class NoteForm {
             </div>`)
             } else if (event.target.value === "Add-Type") {
                 extraFeaturesArea.append(`<div class="form-group">
+
+    static RenderExtraFeatures(){
+      let divContainer = $('#extra-features')
+      let extraFeaturesArea = $('#extra-features-area')
+      divContainer.html('')
+      let selectMenu = $('<select id= "features-menu"></select>').appendTo(divContainer)
+      let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('Add a Feature')
+      let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
+      let addType = $('<option>').attr('value', "Add-Type").attr('id', 'add-Type').html('Add Type')
+
+      selectMenu.append(addFeature)
+      selectMenu.append(addDate)
+      selectMenu.append(addType)
+
+      selectMenu.on('change', function(event){
+        let dateFeature = $('#add-date-feature')
+        let typeFeature = $('#add-type-feature')
+        if (extraFeaturesArea[0].contains(dateFeature[0])){
+          // do nothing
+        }
+        else if (event.target.value === "Add-Date"){
+            extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
+                <input type="date" id="myDate" value="">
+                <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
+              </div>`)
+            }
+              $('#delete-date-button').click(function(){
+                this.parentNode.remove()
+              })
+         if (extraFeaturesArea[0].contains(typeFeature[0])){
+           // do nothing
+        }
+        else if (event.target.value === "Add-Type"){
+          extraFeaturesArea.append(`<div id="add-type-feature"class="form-group">
             <div class="row">
               <div class="col-3">
               </div>
@@ -184,9 +214,15 @@ class NoteForm {
                 </select>
               </div>
             </div>
+            <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
           </div>`)
             }
             debugger
         })
+          $('#delete-type-button').click(function(){
+            this.parentNode.remove()
+          })
+        }
+      })
     }
 }
