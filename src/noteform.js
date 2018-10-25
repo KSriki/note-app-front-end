@@ -27,8 +27,7 @@ class NoteForm {
                       </div>
                       <div class="form-group">
                       <label for="note-description" class="col-12 col-form-label">Note Description</label>
-                      <textarea rows="4" cols="50" id="add-description">
-                      </textarea>
+                      <textarea rows="4" cols="50" id="add-description"></textarea>
                       </div>
                           <div id="extra-features-area">
 
@@ -37,6 +36,11 @@ class NoteForm {
 
                           </div>
 
+                      <div id="calendar-container" class="form-group">
+                        <input type="date" id="myDate" value="">
+                      </div>
+                      <input type="submit" class="btn btn-primary" id="submit-note">
+                      <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
                           <div id="extra-features">
 
 
@@ -48,10 +52,7 @@ class NoteForm {
                   </div>
               </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="submit-note">Submit</button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -72,16 +73,60 @@ class NoteForm {
         // })
     }
     static SubmitNew() {
+        // debugger;
+
+        $('#cancel-form').click(function(){
+            // debugger;
+            $("#name-input").val("");
+            $("#add-description").val("");
+            $('#exampleModal').modal('toggle');
+        })
+
+
+        $('#add-note-form').one('submit', function (e) {
+
+    // do something here
+            e.preventDefault();
+            // debugger;
+            // debugger;
+
+
+                if(!$("#name-input").val() || !$("#add-description").val()){
+                    alert("Please enter a name and description");
+                    return;
+                }
+
         $("#submit-note").click(function() {
             let note = {
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
                 "day_id": 2
             }
-            Adapter.fetchPostNotes(note);
-            Controller.createNote(note)
-            Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length-1]);
+
+            Adapter.fetchPostNotes(note).then(function(note){
+
+
+
+                Controller.createNote(note)
+                // debugger;
+                Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length-1]);
+                debugger;
+               //
+               //  $(this).on('submit', function (evt) {
+               //          evt.preventDefault();
+               // });
+               // $("input[type='submit']", this).attr('disabled', 'disabled');
+               e.target.reset();
+               $('#exampleModal').modal('toggle');
+
+
+
+            });
+
+
         })
+        //
+
 
     }
 
