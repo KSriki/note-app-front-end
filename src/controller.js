@@ -2,20 +2,51 @@ class Controller {
 
     static init() {
         // on page load
-        Adapter.fetchNotes().then(json => Controller.createAndRenderNotes(json))
+        Calendar.all = { days: [], notes: [], types:[]}
+        Adapter.fetchNotes().then(json => {
+            Controller.createDaysFromNotes(json);
+            Controller.createTypesFromNotes(json);
+            Controller.createAndRenderNotes(json);
+        })
         Controller.formListener()
         Calendar.ToggleCalendar()
 
     }
 
+    static createType(type){
+
+        let t = new Type(type.id,type.name)
+    }
+    static createTypesFromNotes(notes){
+
+        notes.forEach(function(note) {
+            Controller.createType(note.type);
+        });
+    }
+
+
+// Mon, 01 Jan -4712 default day
+    static createDay(day){
+        let d = new Day(day.id, day.name, day.date)
+    }
+    static createDaysFromNotes(notes){
+
+        notes.forEach(function(note) {
+            Controller.createDay(note.day);
+        });
+
+
+    }
+
     static createNote(note) {
-        let n = new Note(note.day_id, note.name, note.description, note.id)
+        let n = new Note(note.day_id, note.name, note.description, note.id,note.type_id)
     }
 
     static EditNote(note) {
         Calendar.all.notes.find(function(element) {
             if (element.id == note.id) {
                 element.name = note.name
+                element.type = note.type
                 element.description = note.description
                 element.day_id = note.day_id
             }
@@ -32,16 +63,7 @@ class Controller {
 
     }
     static createAndRenderNotes(notes) {
-        // let container = $('#lobby-container')
-        // container.html('')
-        // notes.forEach(function(note){
-        //      debugger;
-        //     let n = new Note(note.day_id,note.name,note.description,note.id)
-        //     let noteDiv = document.createElement("div")
-        //     noteDiv.id =`note-${note.id}`
-        //     noteDiv.innerHTML = n.render();
-        //     container.append(noteDiv);
-        // });
+
         Controller.createNotes(notes);
         Controller.renderNotes(Calendar.all.notes);
     }
@@ -52,7 +74,11 @@ class Controller {
         let noteDiv = $('<div class="col-md-2"></div>')
         noteDiv.id = `note-${note.id}`
         noteDiv.html(note.render());
+
+
         row.append(noteDiv);
+
+
         // edit listener
         $(`#edit-${note.id}`).click(function(event) {
             NoteForm.EditForm(note)
@@ -79,7 +105,7 @@ class Controller {
         $('#add-a-note-button').click(function(event) {
             NoteForm.RenderForm()
             // Controller.formDate()
-            NoteForm.SubmitNew()
+            // NoteForm.SubmitNew()
         })
     }
 

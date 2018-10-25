@@ -36,5 +36,3 @@ class Calendar{
     })
   }
 }
-
-Calendar.all = { days: [], notes: []}
