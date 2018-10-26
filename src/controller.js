@@ -48,6 +48,7 @@ class Controller {
 
     static EditNote(note) {
         Calendar.all.notes.find(function(element) {
+
             if (element.id == note.id) {
                 element.name = note.name
                 element.type_id = note.type_id

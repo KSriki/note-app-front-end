@@ -8,10 +8,10 @@ class Day {
 
     notes(){
         return calendar.notes.filter(note => {
-            return note.dayId == this.id;
+            return note.day_id == this.id;
         });
     }
-    
+
 
 
 

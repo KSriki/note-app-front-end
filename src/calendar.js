@@ -67,7 +67,7 @@ class Calendar {
 
         let copy = Calendar.all.notes.map(note => {
 
-            if (note.dayId != 1) {
+            if (note.day_id != 1) {
                 return Object.assign({}, note, {
                     date: note.getDay().date,
                     type: note.getType().name
