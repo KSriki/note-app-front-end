@@ -4712,8 +4712,8 @@ input[type="button"].btn-block {
           flex: 1 1 auto;
   padding: 1.25rem;
     height: 400px;
-    overflow-y: scroll;
-    overflow-x:hidden;
+    overflow-y: scroll !important;
+    overflow-x:hidden !important;
 
 }
 
