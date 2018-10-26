@@ -51,7 +51,6 @@ class Note {
       }
             card +=
                 `<h4 class="card-title">${this.name}</h4>
-                <div class="line"></div>
                 <p class="card-text" data-id="${this.id}" id="descript-${this.id}">${this.description}</p>
                 `;
 

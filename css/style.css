@@ -29,9 +29,27 @@ div.scrollable {
 
 
 body {
-  height: 100%;
+
+  min-height: 100%;
   width: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+th > span {
+  color: white;
+}
+
+td > span{
+  color: white;
+
+}
+
+ul > li {
+  color:white;
+}
+
+.fc-left > h2 {
+  color : white;
 }

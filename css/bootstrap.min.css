@@ -2531,8 +2531,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #e74742;
-  border-color: #e53c37;
+  background-color: #2291ac;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -4691,10 +4690,11 @@ input[type="button"].btn-block {
           flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: rgba(88, 68, 68, 0);
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  color: white;
 }
 
 .card > hr {
@@ -6445,7 +6445,7 @@ button.bg-primary:focus {
 }
 
 .bg-secondary {
-  background-color: #aaa !important;
+  background-color:#606060 !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
@@ -6504,7 +6504,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #222 !important;
+  background-color:(88, 68, 68, 0);
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -6574,6 +6574,7 @@ button.bg-dark:focus {
 }
 
 .border-info {
+  background-color:  #369;
   border-color: #369 !important;
 }
 
