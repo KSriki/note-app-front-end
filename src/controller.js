@@ -47,7 +47,6 @@ class Controller {
     }
 
     static EditNote(note) {
-
         Calendar.all.notes.find(function(element) {
             if (element.id == note.id) {
                 element.name = note.name
@@ -55,8 +54,6 @@ class Controller {
                 element.description = note.description
                 element.day_id = note.day_id
             }
-            // put rest - day id type id etc
-            //
         })
     }
 
