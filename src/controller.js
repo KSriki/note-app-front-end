@@ -10,19 +10,14 @@ class Controller {
         Controller.formListener()
         Calendar.ToggleCalendar()
         Controller.searchListener()
-
     }
-
     static createType(type){
-
         let t = new Type(type.id,type.name)
     }
-
     static createTypes(types){
         types.forEach(Controller.createType);
     }
     static loadTypesAndHandleNotes(notes){
-
         Adapter.fetchTypes().then(types => {
             //set types not based on notes
             Controller.createTypes(types);
@@ -47,9 +42,7 @@ class Controller {
     static createNote(note) {
         let n = new Note(note.day_id, note.name, note.description, note.id,note.type_id)
         if(n.day_id != 1){
-
-            //make calendar date 
-
+            //make calendar date
         }
     }
 
@@ -63,7 +56,6 @@ class Controller {
             }
             // put rest - day id type id etc
             // debugger
-
         })
     }
 
@@ -71,7 +63,6 @@ class Controller {
         notes.forEach(function(note) {
             Controller.createNote(note);
         });
-
     }
     static createAndRenderNotes(notes) {
 
@@ -95,7 +86,6 @@ class Controller {
             Adapter.DeleteNote(note)
         })
     }
-
     static renderNotes(notes) {
         let container = $('#lobby-container')
         let row = $('#lobby-row')
@@ -114,16 +104,22 @@ class Controller {
           NoteForm.SubmitNewListener()
             })
     }
-
     static searchListener(){
       let searchInput = $('#search-input')
-      searchInput.keypress(function(event){
+      searchInput.keyup(function(event){
         let row = $('#lobby-row')
-        row.html('')
-        let searchTerm = event.key
-        if (searchTerm !== ''){
+        let searchTerm = $('#search-input').val().toLowerCase()
+        if (event.key == "Backspace"){
+          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
+
+
+        }
+        else if (searchTerm !== ''){
+          row.html('')
           Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
         }
+
+        // else if
 
       })
     }
