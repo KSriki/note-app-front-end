@@ -378,6 +378,9 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.1;
   color: inherit;
 }
+h1 {
+  color: white;
+}
 
 h1, .h1 {
   font-size: 3rem;
@@ -2522,8 +2525,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #EB6864;
-  border-color: #EB6864;
+  background-color: #338599;
+  border-color: #0c0000;
 }
 
 .btn-primary:hover {
@@ -6432,7 +6435,7 @@ button.close {
 }
 
 .bg-primary {
-  background-color: #EB6864 !important;
+  background-color: #d5201b !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -6462,7 +6465,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #369 !important;
+  background-color: #06460e !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,
@@ -6482,7 +6485,7 @@ button.bg-warning:focus {
 }
 
 .bg-danger {
-  background-color: #F57A00 !important;
+  background-color: #e77300 !important;
 }
 
 a.bg-danger:hover, a.bg-danger:focus,
@@ -6492,7 +6495,6 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
@@ -9509,9 +9511,9 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .bg-light {
-  background-color: #fff !important;
+  /* background-color: #fff !important; */
   color: #000;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
 }
 
 .bg-light.navbar-fixed-top {
