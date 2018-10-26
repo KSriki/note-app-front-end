@@ -76,25 +76,27 @@ class Calendar {
         Calendar.clearNotes();
         let cals = $(".fc-day")
 
-        let copy = Calendar.all.notes.map(note => {
+        let copy = Calendar.notesCopy()
 
-            if (note.day_id != 1) {
-                return Object.assign({}, note, {
-                    date: note.getDay().date,
-                    type: note.getType().name
-                });
-            } else {
-                return {};
-            }
-        }).filter(obj => {
-            return !jQuery.isEmptyObject(obj)
+        copy = copy.map(note => {if(note.day_id != 1){return note;}}).filter(obj => {
+             return !jQuery.isEmptyObject(obj)
         });
+        //
+        //     if (note.day_id != 1) {
+        //         return Object.assign({}, note, {
+        //             date: note.getDay().date,
+        //             type: note.getType().name
+        //         });
+        //     } else {
+        //         return {};
+        //     }
+        // })
 
         // debugger;
-        copy.sort(function(c1, c2) {
+        copy.sort(function(n1, n2) {
             // debugger;
-            let d1 = new Date(c1.date);
-            let d2 = new Date(c2.date);
+            let d1 = new Date(n1.getDay().date);
+            let d2 = new Date(n2.getDay().date);
             if (d1 > d2) {
                 return 1;
             } else if (d1 < d2) {
@@ -107,7 +109,7 @@ class Calendar {
 
         copy.forEach(function(note) {
 
-            let date = note.date
+            let date = note.getDay().date;
             for (let i = 0; i < cals.length; i++) {
                 // debugger
                 if (cals[i].dataset.date === date) {
@@ -133,14 +135,14 @@ class Calendar {
 
                     inner.innerHTML = `${note.name}`;
 
-                    if (note.type == "Urgent") {
+                    if (note.getType().name == "Urgent") {
                         inner.classList.add("class", "bg-primary")
-                    } else if (note.type == "Work") {
+                    } else if (note.getType().name == "Work") {
                         inner.classList.add("class", "bg-danger")
-                    } else if (note.type == "Personal") {
+                    } else if (note.getType().name == "Personal") {
                         inner.classList.add("class", "bg-info")
                     }
-                    else if (note.type == "Not Urgent") {
+                    else if (note.getType().name == "Not Urgent") {
                         inner.classList.add("class", "border-info")
                     } else {
                         inner.classList.add("class", "bg-secondary")
@@ -148,6 +150,11 @@ class Calendar {
                     }
 
                     cals[i].children[0].children[0].appendChild(inner)
+                    // debugger;
+                    inner.addEventListener("click",function(){
+                        // debugger;
+                        NoteForm.EditForm(note);
+                    })
 
                 }
             }

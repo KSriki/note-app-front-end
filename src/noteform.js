@@ -285,6 +285,7 @@ $('#exampleModal').modal('show')
                         Controller.EditNote(note)
                         Controller.renderNotes(Calendar.all.notes)
                         $('#exampleModal').modal('toggle');
+                        Calendar.loadNotes();
                     }
                     else{
                         //post and make a new Date
@@ -308,7 +309,7 @@ $('#exampleModal').modal('show')
                                     Controller.EditNote(n)
                                     Controller.renderNotes(Calendar.all.notes)
                                     $('#exampleModal').modal('toggle');
-
+                                    Calendar.loadNotes();
                                 });
                                 // $('#add-note-form').off("submit");
                         });
@@ -328,6 +329,7 @@ $('#exampleModal').modal('show')
                     Controller.EditNote(note)
                     Controller.renderNotes(Calendar.all.notes)
                     $('#exampleModal').modal('toggle');
+                    Calendar.loadNotes();
                 }
 
             } else {
@@ -335,6 +337,8 @@ $('#exampleModal').modal('show')
 ;
             }
         })
+
+
     }
 
 
