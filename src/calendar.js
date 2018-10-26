@@ -55,7 +55,7 @@ class Calendar {
             if (note.dayId != 1) {
                 return Object.assign({}, note, {
                     date: note.getDay().date,
-                    type: note.getType.name
+                    type: note.getType().name
                 });
             } else {
                 return {};
@@ -85,25 +85,43 @@ class Calendar {
             for (let i = 0; i < cals.length; i++) {
                 // debugger
                 if (cals[i].dataset.date === date) {
-                    cals[i].classList.add("card-body");
+
+                    // cals[i].classList.add("card-body");
                     //find again
+                    // debugger;
+
                     if (!cals[i].innerHTML) {
-
-
+                        let surround = document.createElement("div");
+                        surround.setAttribute("class", "scrollable")
+                        cals[i].appendChild(surround);
                         let listCal = document.createElement("ul");
-                        listCal.setAttribute("class","list-group")
-                        listCal.id= `list-${note.id}`
+                        listCal.setAttribute("class", "list-group")
+                        listCal.id = `list-${note.id}`
 
-                        cals[i].appendChild(listCal);
+                        surround.appendChild(listCal);
                     }
 
                     // debugger;
                     let inner = document.createElement("li");
-                    inner.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+                    inner.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
 
                     inner.innerHTML = `${note.name}`;
 
-                        cals[i].children[0].appendChild(inner)
+                    if (note.type == "Urgent") {
+                        inner.classList.add("class", "bg-primary")
+                    } else if (note.type == "Work") {
+                        inner.classList.add("class", "bg-danger")
+                    } else if (note.type == "Personal") {
+                        inner.classList.add("class", "bg-info")
+                    }
+                    else if (note.type == "Not Urgent") {
+                        inner.classList.add("class", "border-info")
+                    } else {
+                        inner.classList.add("class", "bg-secondary")
+
+                    }
+
+                    cals[i].children[0].children[0].appendChild(inner)
 
                 }
             }
