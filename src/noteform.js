@@ -140,6 +140,7 @@ $('#exampleModal').modal('show')
                             Controller.createNote(note)
 
                             Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+
                             $('#exampleModal').modal('toggle');
                     }
                     else{
