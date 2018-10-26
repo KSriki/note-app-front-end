@@ -234,21 +234,86 @@ $('#exampleModal').modal('show')
         $("#add-note-form").submit(function(event) {
             event.preventDefault();
             let id = $("#add-note-form").attr("data-id")
-            let note = {
-                "id": id,
-                "name": $("#name-input").val(),
-                "description": $("#add-description").val(),
-                "day_id": 2,
-                "type_id": $('#type-menu').val()
+            if ($("#name-input").val() && $("#add-description").val()) {
+                let note = {
+                    "id": id,
+                    "name": $("#name-input").val(),
+                    "description": $("#add-description").val(),
+                }
+
+                debugger;
+                if($("#type-menu") && $("#type-menu").val() ){
+                    debugger;
+                    note.type_id = $('#type-menu').val()
+
+                }
+                else{
+                    note.type_id = 1;
+                }
+                if($("#myDate") && $("#myDate").val() ){
+                  debugger
+
+                    let dString = $("#myDate").val();
+
+                    let date = Calendar.findDay(dString);
+                    //date already exists
+
+                    if(date){
+                        note.day_id = date.id;
+                        Adapter.fetchPostNotes(note)
+                            // $('#add-note-form').off("submit");
+
+
+                            Controller.createNote(note)
+
+                            Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                            $('#exampleModal').modal('toggle');
+                    }
+                    else{
+                        //post and make a new Date
+                        let newDate = new Date(dString);
+                        // debugger;
+                        let day = {
+                            name: Calendar.weekdays[newDate.getDay()],
+                            date: newDate
+
+                        }
+                        ////////////////////////////////////////////////////////////////change this to edit the date not make new one
+                        Adapter.PostDay(day).then(newDay => {
+                                console.log(newDay);
+
+                                Controller.createDay(newDay);
+                                note.day_id = newDay.id;
+                                Adapter.fetchPostNotes(note).then(n =>
+                                {
+                                    Controller.createNote(n)
+                                    Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                                    $('#exampleModal').modal('toggle');
+
+                                });
+                                // $('#add-note-form').off("submit");
+                        });
+
+                    }
+                    // dString
+                    // //find in database
+                    // note.day_id =
+                }
+                else{
+                    note.day_id = 1;
+                    // debugger;
+                    Adapter.PatchNote(note)
+                    //only change the note we want to change
+                    let row = $('#lobby-row')
+                    row.html('')
+                    Controller.EditNote(note)
+                    Controller.renderNotes(Calendar.all.notes)
+                    $('#exampleModal').modal('toggle');
+                }
+
+            } else {
+                alert("Please enter a name and description");
             }
-            Adapter.PatchNote(note)
-            //only change the note we want to change
-            let row = $('#lobby-row')
-            row.html('')
-            Controller.EditNote(note)
-            Controller.renderNotes(Calendar.all.notes)
-            $('#exampleModal').modal('toggle');
-;
         })
     }
 
