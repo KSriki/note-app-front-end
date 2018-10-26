@@ -20,17 +20,17 @@ class NoteForm {
                 </div>
               </div>
                   <div class="col-3"></div>
-                  <div class="col-6 text-center">
+                  <div class="col-9 text-center">
                     <div class="bs-component">
                       <form id="add-note-form">
                       <fieldset>
                       <div class="form-group">
-                      <label for="note-name" class="col-12 col-form-label">Name of Note</label>
-                      <input class="col-6" type="note-name-input" class="form-control" name="name-input" id="name-input" placeholder="Enter A Name For This Note">
+                      <label for="note-name" class="col-12 col-form-label text-left">Name of Note</label>
+                      <input class="col-12" type="note-name-input" class="form-control" name="name-input" id="name-input" placeholder="Enter A Name">
                       </div>
                       <div class="form-group">
-                      <label for="note-description" class="col-12 col-form-label">Note Description</label>
-                      <textarea rows="4" cols="50" id="add-description"></textarea>
+                      <label for="note-description" class="col-12 col-form-label text-left">Note Description</label>
+                      <textarea placeholder="Write Your Note Here" rows="4" cols="50" id="add-description"></textarea>
                       </div>
                           <div id="extra-features-area">
 
@@ -266,7 +266,7 @@ $('#exampleModal').modal('show')
                     note.type_id = 1;
                 }
                 if($("#myDate") && $("#myDate").val() ){
-                  
+
 
                     let dString = $("#myDate").val();
 
@@ -344,6 +344,7 @@ $('#exampleModal').modal('show')
         extraFeaturesArea.html('')
         divContainer.html('')
         divContainer.html('Add A Feature')
+        divContainer.addClass('text-left')
         let selectMenu = $('<select id= "features-menu"> </select>').appendTo(divContainer)
         let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('')
         let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
