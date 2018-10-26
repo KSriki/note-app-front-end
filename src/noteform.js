@@ -109,7 +109,7 @@ $('#exampleModal').modal('show')
                     note.type_id = 1;
                 }
 
-
+        
                 if($("#myDate") && $("#myDate").val() ){
 
                     let dString = $("#myDate").val();
@@ -119,6 +119,14 @@ $('#exampleModal').modal('show')
 
                     if(date){
                         note.day_id = date.id;
+                        Adapter.fetchPostNotes(note)
+                            // $('#add-note-form').off("submit");
+
+
+                            Controller.createNote(note)
+
+                            Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                            $('#exampleModal').modal('toggle');
                     }
                     else{
                         //post and make a new Date
