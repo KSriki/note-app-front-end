@@ -1,7 +1,4 @@
-
 class Note {
-
-    //need to add type id
     constructor(day_id,name,description,id,type_id){
         this.day_id = day_id;
         this.id = id;
@@ -49,7 +46,7 @@ class Note {
       }
       else {
         card += `
-        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
           <div class="card-body">`
       }
             card +=
@@ -67,8 +64,8 @@ class Note {
         }
 
             card+=  `<p id="type-${this.id}" data-typeid="${this.type_id}">${this.getType().name}</p>
-                <button id="edit-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Edit Note </button>
-                <button id="delete-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Delete Note </button>
+                <button class="btn btn-info btn-sm"id="edit-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Edit Note </button>
+                <button class= "btn btn-dark btn-sm" id="delete-${this.id}" data-id="${this.id}" data-desc="${this.description}" data-name="${this.name}"> Delete Note </button>
 
             </div>
         </div>`
