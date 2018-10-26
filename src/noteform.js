@@ -109,7 +109,7 @@ $('#exampleModal').modal('show')
                     note.type_id = 1;
                 }
 
-        
+
                 if($("#myDate") && $("#myDate").val() ){
 
                     let dString = $("#myDate").val();
@@ -184,7 +184,6 @@ $('#exampleModal').modal('show')
 
         })
     }
-
     static EditForm(note) {
       NoteForm.RenderForm()
       $('#exampleModal').modal()
@@ -192,7 +191,6 @@ $('#exampleModal').modal('show')
       let divContainer = $('#extra-features')
       let extraFeaturesArea = $('#extra-features-area')
       extraFeaturesArea.html('')
-
         if (note.getType().name !== "No Type"){
           extraFeaturesArea.append(`<div id="add-type-feature" class="form-group">
               <div class="row">
@@ -206,27 +204,15 @@ $('#exampleModal').modal('show')
           </div>
           <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
       </div>`)
-        debugger
           let typeMenu = $('#type-menu')
           Calendar.all.types.forEach(type => {
           let typeOption = $('<option>').attr('value', `${type.id}`).attr('id', `type-${type.name}`).html(type.name)
             typeMenu.append(typeOption)
           })
+          typeMenu.val(note.type_id)
           $('#delete-type-button').click(function() {
               this.parentNode.remove()
           })
-
-
-
-
-
-
-
-
-
-
-
-
         }
         if (note.dayId > 1) {
           extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
@@ -239,9 +225,6 @@ $('#exampleModal').modal('show')
               this.parentNode.remove()
           })
         }
-
-
-
         // this allows to pass the id through the submission and patch
         $("#add-note-form").attr("data-id", note.id)
         //have input values already rendered in inputs to edit
@@ -256,7 +239,7 @@ $('#exampleModal').modal('show')
                 "name": $("#name-input").val(),
                 "description": $("#add-description").val(),
                 "day_id": 2,
-                "type_id": 1
+                "type_id": $('#type-menu').val()
             }
             Adapter.PatchNote(note)
             //only change the note we want to change

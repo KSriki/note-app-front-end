@@ -47,15 +47,16 @@ class Controller {
     }
 
     static EditNote(note) {
+
         Calendar.all.notes.find(function(element) {
             if (element.id == note.id) {
                 element.name = note.name
-                element.type = note.type
+                element.type_id = note.type_id
                 element.description = note.description
                 element.day_id = note.day_id
             }
             // put rest - day id type id etc
-            // debugger
+            //
         })
     }
 
@@ -87,6 +88,7 @@ class Controller {
         })
     }
     static renderNotes(notes) {
+
         let container = $('#lobby-container')
         let row = $('#lobby-row')
         row.html('')
