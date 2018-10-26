@@ -63,6 +63,14 @@ class Calendar {
             cals[i].innerText = "";
         }
     }
+
+    static notesCopy(){
+        return Calendar.all.notes.map(note => {
+                return  Object.assign( Object.create( Object.getPrototypeOf(note)), note);
+        });
+    }
+
+
     static loadNotes() {
         // debugger;
         Calendar.clearNotes();

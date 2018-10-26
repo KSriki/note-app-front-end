@@ -75,7 +75,17 @@ class Controller {
         let noteDiv = $('<div class="col-md-2"></div>')
         noteDiv.id = `note-${note.id}`
         noteDiv.html(note.render());
-        row.append(noteDiv);
+
+
+        //urgents get prepended
+        if(note.type_id == 2){
+            row.prepend(noteDiv);
+        }
+        else {
+            row.append(noteDiv);
+        }
+
+
         // edit listener
         $(`#edit-${note.id}`).click(function(event) {
             NoteForm.EditForm(note)
@@ -91,10 +101,38 @@ class Controller {
     }
     static renderNotes(notes) {
 
+
+        //sort notes
+        // debugger;
+
+        let copy = notes.map(note => {
+                return  Object.assign( Object.create( Object.getPrototypeOf(note)), note);
+        });
+
+        // debugger;
+        //type sort by urgent
+        copy.sort(function(t1, t2) {
+            // debugger;
+            if(t1.type_id == t2.type_id){
+                return 0;
+            }
+            else if(t1.type_id == 2){
+                return -1;
+            }
+            else if(t2.type_id == 2){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        });
+
+
+        // debugger;
         let container = $('#lobby-container')
         let row = $('#lobby-row')
         row.html('')
-        notes.forEach(Controller.renderNote)
+        copy.forEach(Controller.renderNote)
     }
 
     static hideForm() {
@@ -114,11 +152,11 @@ class Controller {
         let row = $('#lobby-row')
         let searchTerm = $('#search-input').val().toLowerCase()
         if (event.key == "Backspace"){
-          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
+          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.toLowerCase().search(searchTerm) != -1))
         }
         else if (searchTerm !== ''){
           row.html('')
-          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
+          Controller.renderNotes(Calendar.all.notes.filter(note => note.name.toLowerCase().search(searchTerm) != -1))
         }
 
         // else if
