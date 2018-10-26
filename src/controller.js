@@ -111,8 +111,6 @@ class Controller {
         let searchTerm = $('#search-input').val().toLowerCase()
         if (event.key == "Backspace"){
           Controller.renderNotes(Calendar.all.notes.filter(note => note.name.includes(searchTerm)))
-
-
         }
         else if (searchTerm !== ''){
           row.html('')

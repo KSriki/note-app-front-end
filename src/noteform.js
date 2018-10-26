@@ -185,6 +185,41 @@ $('#exampleModal').modal('show')
       let extraFeaturesArea = $('#extra-features-area')
       extraFeaturesArea.html('')
 
+        if (note.getType().name !== "No Type"){
+          extraFeaturesArea.append(`<div id="add-type-feature" class="form-group">
+              <div class="row">
+              <div class="col-3"></div>
+              <div class="col-6">
+                  <label for="note-type">Type of Note</label>
+                  <select id="type-menu" class="form-control" id="exampleSelect1">
+
+                  </select>
+              </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" name="delete-type-button" id="delete-type-button">x</button>
+      </div>`)
+        debugger
+          let typeMenu = $('#type-menu')
+          Calendar.all.types.forEach(type => {
+          let typeOption = $('<option>').attr('value', `${type.id}`).attr('id', `type-${type.name}`).html(type.name)
+            typeMenu.append(typeOption)
+          })
+          $('#delete-type-button').click(function() {
+              this.parentNode.remove()
+          })
+
+
+
+
+
+
+
+
+
+
+
+
+        }
         if (note.dayId > 1) {
           extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
           <input type="date" id="myDate" value='${note.dayId}'>
@@ -196,6 +231,7 @@ $('#exampleModal').modal('show')
               this.parentNode.remove()
           })
         }
+
 
 
         // this allows to pass the id through the submission and patch
