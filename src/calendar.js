@@ -48,6 +48,57 @@ class Calendar{
   }
 
   static loadNotes(){
+      let cals = $(".fc-day")
+
+      let copy = Calendar.all.notes.map(note => {
+
+          if(note.dayId != 1){
+              return Object.assign({},note,{date:note.getDay().date,type:note.getType.name });
+          }
+          else{
+              return {};
+          }
+    }).filter(obj => {return !jQuery.isEmptyObject(obj)});
+
+          // debugger;
+      copy.sort(function(c1,c2){
+          // debugger;
+          let d1 = new Date(c1.date);
+          let d2 = new Date(c2.date);
+          if(d1 > d2 ){
+              return 1;
+          }
+          else if(d1 < d2){
+              return -1;
+          }
+          else {
+              return 0;
+          }
+
+      });
+
+      copy.forEach(function(note){
+
+              let date = note.date
+              for(let i = 0; i < cals.length;i++){
+                  // debugger;
+                  if(cals[i].dataset.date === date){
+
+                      //find again
+                      if(!cals[i].innerHTML){
+                      let inner = `<ul class="list-group" id="list-${note.id}">
+                                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            ${note.name}
+                                        <span class="badge badge-primary badge-pill">${note.type}</span>
+                                      </li>
+
+                                    </ul>`
+                    cals[i].innerHTML = inner
+                    }
+                  }
+              }
+
+      });
     //   debugger;
     //   let cals = $(".fc-day")
     //   Calendar.all.notes.forEach(function(note){
