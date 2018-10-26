@@ -85,16 +85,21 @@ class Calendar {
             for (let i = 0; i < cals.length; i++) {
                 // debugger
                 if (cals[i].dataset.date === date) {
-                    cals[i].classList.add("card-body");
+
+
+                    // cals[i].classList.add("card-body");
                     //find again
+                    // debugger;
+
                     if (!cals[i].innerHTML) {
-
-
+                        let surround = document.createElement("div");
+                        surround.setAttribute("class","scrollable")
+                        cals[i].appendChild(surround);
                         let listCal = document.createElement("ul");
                         listCal.setAttribute("class","list-group")
                         listCal.id= `list-${note.id}`
 
-                        cals[i].appendChild(listCal);
+                        surround.appendChild(listCal);
                     }
 
                     // debugger;
@@ -103,7 +108,7 @@ class Calendar {
 
                     inner.innerHTML = `${note.name}`;
 
-                        cals[i].children[0].appendChild(inner)
+                        cals[i].children[0].children[0].appendChild(inner)
 
                 }
             }
