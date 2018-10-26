@@ -7,18 +7,18 @@ class Calendar {
         calendarDiv.attr("id", "calendar")
         container.append(calendarDiv)
         calendarDiv.fullCalendar({
-            header: {
-                center: 'agendaSevenDay,month' // buttons for switching between views
-            },
-            views: {
-                agendaSevenDay: {
-                    type: 'agenda',
-                    duration: {
-                        days: 7
-                    },
-                    buttonText: '7 day'
-                }
-            }
+            // header: {
+            //     center: 'agendaSevenDay,month' // buttons for switching between views
+            // }
+            // views: {
+            //     agendaSevenDay: {
+            //         type: 'agenda',
+            //         duration: {
+            //             days: 7
+            //         },
+            //         buttonText: '7 day'
+            //     }
+            // }
         });
         Calendar.loadNotes();
 

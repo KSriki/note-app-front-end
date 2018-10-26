@@ -82,9 +82,6 @@ $('#exampleModal').modal('show')
       $(".alert").alert().show()
   ; // Keep close.bs.alert event from removing from DOM
 }
-
-
-
     static cancelListener(){
       $(".modal").on("hidden.bs.modal", function(e) {
 
@@ -92,6 +89,7 @@ $('#exampleModal').modal('show')
           $("#add-description").val("");
           $('#add-note-form').off("submit")
           $('#add-a-note-button').off("click")
+          $('#legend').html('ADD A NOTE')
           Controller.formListener()
       });
 
@@ -203,6 +201,7 @@ $('#exampleModal').modal('show')
     }
     static EditForm(note) {
       NoteForm.RenderForm()
+      $('#legend').html('EDIT A NOTE')
       $('#exampleModal').modal()
 
       let divContainer = $('#extra-features')
