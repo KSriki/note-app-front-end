@@ -23,9 +23,11 @@ class Calendar {
         Calendar.loadNotes();
 
         // debugger;
+        //hacky but works
         $(".fc-prev-button").click(Calendar.loadNotes)
         $(".fc-next-button").click(Calendar.loadNotes)
-
+        $(".fc-month-button").click(Calendar.loadNotes)
+        $(".fc-today-button").click(Calendar.loadNotes)
 
 
     }
@@ -62,6 +64,7 @@ class Calendar {
         }
     }
     static loadNotes() {
+        // debugger;
         Calendar.clearNotes();
         let cals = $(".fc-day")
 
