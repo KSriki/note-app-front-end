@@ -100,7 +100,9 @@ $('#exampleModal').modal('show')
                     "description": $("#add-description").val(),
                 }
 
-                if($("#exampleSelect1")){
+                // debugger;
+                if($("#type-menu") && $("#type-menu").val() ){
+                    // debugger;
                     note.type_id = $('#type-menu').val();
                 }
                 else{
@@ -151,7 +153,7 @@ $('#exampleModal').modal('show')
                 }
                 else{
                     note.day_id = 1;
-
+                    // debugger;
                     Adapter.fetchPostNotes(note)
                         // $('#add-note-form').off("submit");
 
@@ -195,7 +197,7 @@ $('#exampleModal').modal('show')
           })
         }
 
-      
+
         // this allows to pass the id through the submission and patch
         $("#add-note-form").attr("data-id", note.id)
         //have input values already rendered in inputs to edit

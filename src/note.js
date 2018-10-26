@@ -11,6 +11,7 @@ class Note {
         Calendar.all.notes.push(this);
     }
 
+
     getDay(){
         return Calendar.all.days.find(day => {
             return this.dayId == day.id;
@@ -24,6 +25,7 @@ class Note {
     }
 
     render(){
+        // debugger;
       let card = ''
       if (this.getType().name == "Urgent") {
         card += `
