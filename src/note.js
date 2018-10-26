@@ -3,7 +3,7 @@ class Note {
 
     //need to add type id
     constructor(day_id,name,description,id,type_id){
-        this.dayId = day_id;
+        this.day_id = day_id;
         this.id = id;
         this.type_id = type_id;
         this.name = name;
@@ -14,7 +14,7 @@ class Note {
 
     getDay(){
         return Calendar.all.days.find(day => {
-            return this.dayId == day.id;
+            return this.day_id == day.id;
         });
     }
 

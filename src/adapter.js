@@ -24,7 +24,7 @@ class Adapter {
     }
 
     static PatchNote(note){
-      debugger
+      
       const url = `http://localhost:3000/notes/${note.id}`
       return fetch(url, {
         method: "PATCH",

@@ -14,20 +14,23 @@ class NoteForm {
             </button>
           </div>
           <div class="modal-body">
-
+              <div class= "row">
+                <div class="alert alert-danger ">
+                <strong>Oh snap! The Name and/or Description is Empty.</strong>
+                </div>
+              </div>
                   <div class="col-3"></div>
-                  <div class="col-6 text-center">
+                  <div class="col-9 text-center">
                     <div class="bs-component">
                       <form id="add-note-form">
                       <fieldset>
-
                       <div class="form-group">
-                      <label for="note-name" class="col-12 col-form-label">Name of Note</label>
-                      <input class="col-6" type="note-name-input" class="form-control" name="name-input" id="name-input" placeholder="Enter A Name For This Note">
+                      <label for="note-name" class="col-12 col-form-label text-left">Name of Note</label>
+                      <input class="col-12" type="note-name-input" class="form-control" name="name-input" id="name-input" placeholder="Enter A Name">
                       </div>
                       <div class="form-group">
-                      <label for="note-description" class="col-12 col-form-label">Note Description</label>
-                      <textarea rows="4" cols="50" id="add-description"></textarea>
+                      <label for="note-description" class="col-12 col-form-label text-left">Note Description</label>
+                      <textarea placeholder="Write Your Note Here" rows="4" cols="50" id="add-description"></textarea>
                       </div>
                           <div id="extra-features-area">
 
@@ -49,12 +52,16 @@ class NoteForm {
               </div>
           </div>
 
+
+
+
         </div>
       </div>
     </div>
 `)
 $('#exampleModal').modal('show')
         container.append(formDiv)
+        $(".alert").alert().hide()
         NoteForm.cancelListener()
         NoteForm.RenderExtraFeatures()
 
@@ -69,7 +76,14 @@ $('#exampleModal').modal('show')
         //   container.html('')
         //   Controller.renderNotes(Calendar.all.notes);
         // })
-    }
+}
+
+    static toggleAlert(){
+      $(".alert").alert().show()
+  ; // Keep close.bs.alert event from removing from DOM
+}
+
+
 
     static cancelListener(){
       $(".modal").on("hidden.bs.modal", function(e) {
@@ -179,13 +193,12 @@ $('#exampleModal').modal('show')
                 }
 
             } else {
-                alert("Please enter a name and description");
+                NoteForm.toggleAlert();
             }
             if ($('#calendarButton').html() === "Hide My Calendar"){
                 // debugger;
-                Calendar.loadNotes();
+              Calendar.loadNotes();
             }
-
         })
     }
     static EditForm(note) {
@@ -218,9 +231,9 @@ $('#exampleModal').modal('show')
               this.parentNode.remove()
           })
         }
-        if (note.dayId > 1) {
+        if (note.day_id > 1) {
           extraFeaturesArea.append(`<div id="add-date-feature" class="form-group">
-          <input type="date" id="myDate" value='${note.dayId}'>
+          <input type="date" id="myDate" value='${note.day_id}'>
               <button type="button" class="btn btn-primary btn-sm" name="delete-date-button" id="delete-date-button">x</button>
           </div>`)
 
@@ -245,9 +258,7 @@ $('#exampleModal').modal('show')
                     "description": $("#add-description").val(),
                 }
 
-                debugger;
                 if($("#type-menu") && $("#type-menu").val() ){
-                    debugger;
                     note.type_id = $('#type-menu').val()
 
                 }
@@ -255,7 +266,7 @@ $('#exampleModal').modal('show')
                     note.type_id = 1;
                 }
                 if($("#myDate") && $("#myDate").val() ){
-                  debugger
+
 
                     let dString = $("#myDate").val();
 
@@ -264,14 +275,16 @@ $('#exampleModal').modal('show')
 
                     if(date){
                         note.day_id = date.id;
-                        Adapter.fetchPostNotes(note)
-                            // $('#add-note-form').off("submit");
 
 
-                            Controller.createNote(note)
 
-                            Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
-                            $('#exampleModal').modal('toggle');
+                        Adapter.PatchNote(note)
+                        //only change the note we want to change
+                        let row = $('#lobby-row')
+                        row.html('')
+                        Controller.EditNote(note)
+                        Controller.renderNotes(Calendar.all.notes)
+                        $('#exampleModal').modal('toggle');
                     }
                     else{
                         //post and make a new Date
@@ -288,10 +301,12 @@ $('#exampleModal').modal('show')
 
                                 Controller.createDay(newDay);
                                 note.day_id = newDay.id;
-                                Adapter.fetchPostNotes(note).then(n =>
+                                Adapter.PatchNote(note).then(n =>
                                 {
-                                    Controller.createNote(n)
-                                    Controller.renderNote(Calendar.all.notes[Calendar.all.notes.length - 1]);
+                                  let row = $('#lobby-row')
+                                    row.html('')
+                                    Controller.EditNote(n)
+                                    Controller.renderNotes(Calendar.all.notes)
                                     $('#exampleModal').modal('toggle');
 
                                 });
@@ -316,7 +331,8 @@ $('#exampleModal').modal('show')
                 }
 
             } else {
-                alert("Please enter a name and description");
+              NoteForm.toggleAlert();
+;
             }
         })
     }
@@ -328,6 +344,7 @@ $('#exampleModal').modal('show')
         extraFeaturesArea.html('')
         divContainer.html('')
         divContainer.html('Add A Feature')
+        divContainer.addClass('text-left')
         let selectMenu = $('<select id= "features-menu"> </select>').appendTo(divContainer)
         let addFeature = $('<option>').attr('value', "add a Feature").attr('id', 'add-Feature').html('')
         let addDate = $('<option>').attr('value', "Add-Date").attr('id', 'add-Date').html('Add Date')
