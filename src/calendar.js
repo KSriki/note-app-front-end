@@ -21,6 +21,13 @@ class Calendar {
             }
         });
         Calendar.loadNotes();
+
+        // debugger;
+        $(".fc-prev-button").click(Calendar.loadNotes)
+        $(".fc-next-button").click(Calendar.loadNotes)
+
+
+
     }
 
     static ToggleCalendar() {
@@ -47,7 +54,15 @@ class Calendar {
         })
     }
 
+    static clearNotes(){
+        let cals = $(".fc-day")
+        for (let i = 0; i < cals.length; i++) {
+            // debugger
+            cals[i].innerText = "";
+        }
+    }
     static loadNotes() {
+        Calendar.clearNotes();
         let cals = $(".fc-day")
 
         let copy = Calendar.all.notes.map(note => {

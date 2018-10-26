@@ -181,6 +181,10 @@ $('#exampleModal').modal('show')
             } else {
                 alert("Please enter a name and description");
             }
+            if ($('#calendarButton').html() === "Hide My Calendar"){
+                // debugger;
+                Calendar.loadNotes();
+            }
 
         })
     }

@@ -81,6 +81,10 @@ class Controller {
         })
         $(`#delete-${note.id}`).click(function(event) {
             this.parentElement.parentElement.remove()
+            // debugger;
+            Calendar.all.notes = Calendar.all.notes.filter(function(n){
+                return n.id != note.id
+            })
             Adapter.DeleteNote(note)
         })
     }
