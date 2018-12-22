@@ -83,4 +83,20 @@ In Terminal/Console:
 ## Screenshots
 
 
+| Homepage  |
+| ------------- | 
+| <img src="assets/HomePage.png" alt="homepage"  />   | 
+
+
+
+| Create a note | Edit a note |
+| ------------- | ------------- |
+| <img src="assets/NewNote.png" alt="new note" /> | <img src="assets/Edit.png" alt="edit"/> | 
+
+
+
+| Calendar 1 | Calendar 2 |
+| ------------- | ------------- | 
+| <img src="assets/Calendar1.png" alt="calendar1" /> | <img src="assets/Calendar2.png" alt="calender2" /> | 
+
 
