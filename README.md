@@ -7,6 +7,10 @@ This application allows users to create, read, update and delete (CRUD) notes an
 
 The purpose of this application was to help ourselves get organized while learning JavaScript!
 
+## Demo
+
+[Link to Demo](https://www.youtube.com/watch?v=aZ5TZnHSJAc)
+
 
 ## Collaborators
 - Srikant Kumar Kalaputapu, [@KSriki](https://github.com/KSriki)
