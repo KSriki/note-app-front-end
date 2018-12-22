@@ -3,7 +3,7 @@
 
 We built this project for our FlatIron School mod 3 project. We used it as an opportunity to learn how to create single-page applications with JavaScript. We implemented the MVC architectural pattern (Model-Controller-Adapter-View in this case).
 
-This application allows users to create, read, update and delete (CRUD) notes and categorize them by type. It allows users to also add a date for their notes, displaying on the provided FullCalendar if they do so. Users can also search for notes. 
+This application allows users to create, read, update and delete (CRUD) notes and categorize them by type. It allows users to also add a date for their notes, displaying on the provided FullCalendar if they do so. Users can also search for notes. Notes marked as urgent appear first in the list of notes on the homepage.
 
 The purpose of this application was to help ourselves get organized while learning JavaScript!
 
@@ -26,6 +26,7 @@ This is a Single-Page Application.
 ## Features
 
 - Allows users to create a note with title and description
+- Urgent notes are first in list
 - Allows users to assign a type (like important, work etc.) to a note (color changes depending)
 - Allows users to assign a date for each note
 - Allows users to edit notes
