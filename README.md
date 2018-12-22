@@ -3,9 +3,9 @@
 
 We built this project for our FlatIron School mod 3 project. We used it as an opportunity to learn how to create single-page applications with JavaScript. We implemented the MVC architectural pattern (Model-Controller-Adapter-View in this case).
 
-This application allows users to create, read, update and delete (CRUD) notes and categorize them by type. We allow users to also add a date for their notes, displaying on the provided FullCalendar if they do so. Users can also search for notes and 
+This application allows users to create, read, update and delete (CRUD) notes and categorize them by type. It allows users to also add a date for their notes, displaying on the provided FullCalendar if they do so. Users can also search for notes. 
 
-The purpose of this application was to help ourselves get organized.
+The purpose of this application was to help ourselves get organized while learning JavaScript!
 
 
 ## Collaborators
@@ -37,25 +37,25 @@ This is a Single-Page Application.
 
 - React
 - Fix modals/editing and updating
-- Change workflow for calendar (from month to month to year fetch. React will help this a lot with lifecycle methods)
+- Change workflow for calendar (React will help this a lot with lifecycle methods)
 
 
 ## How to use
 
 Requires Git, Ruby, Bundler
 
+
 In Terminal/Console:
 
 ```
- # Clone the repo
- $ git clone git@github.com:KSriki/Khazana.git
+ # Clone the front end repo
+ $ git clone git@github.com:KSriki/note-app-front-end.git
  
- # go into application
- $ cd Khazana
+ # Clone the back end repo
+ $ git clone git@github.com:KSriki/noteapp.git
  
  # navigate to backend
- $ cd back-end
- $ cd cooking_backend
+ $ cd noteapp
  
  # setup backend
  $ bundle install
@@ -72,17 +72,11 @@ In Terminal/Console:
  # run the server
  $ rails s
  
- ## In another terminal window set up front end
- $ cd front-end
- $ cd cooking_frontend
+ ## In another terminal window, open the front end
+ $ cd note-app-front-end
  
- # Install the packages
- $ npm install
- 
- # start the server
- $ npm start
- 
- # Type and enter 'yes' when asked for different port (3000 is taken by the backend)
+ # Open the single page application
+ $ open index.html
  
 ```
 ## Screenshots
