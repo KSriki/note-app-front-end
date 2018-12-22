@@ -45,6 +45,9 @@ This is a Single-Page Application.
 
 Requires Git, Ruby, Bundler
 
+Link to backend repo:  
+[BackEnd](https://github.com/KSriki/noteapp).    
+
 
 In Terminal/Console:
 
